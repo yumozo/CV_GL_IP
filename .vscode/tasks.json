@@ -1,0 +1,35 @@
+{
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "C/C++: g++.exe アクティブなファイルのビルド",
+      "command": "C:\\msys64\\mingw64\\bin\\g++.exe",
+      "args": [
+        "-fdiagnostics-color=always",
+        "-g",
+        // "${file}",
+        "main.cpp",
+        // "libglfw3.a",
+        "-Llib",
+        "-Iinclude",
+        "-o",
+        "${fileDirname}\\${fileBasenameNoExtension}.exe",
+        
+        // "-llib/lib-mingw/libglfw3.a",
+        // "-llib/lib-mingw/glfw3.dll",
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "OpenGL with GLFW build"
+    }
+  ],
+  "version": "2.0.0"
+}
