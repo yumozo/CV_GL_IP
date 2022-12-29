@@ -1,0 +1,1 @@
+-IC:/Users/Hugo/Desktop/Learning/learning_CG/OpenGL/Test2/imgui/imgui -I"C:/Users/Hugo/Desktop/Learning/learning_CG/OpenGL/Test2/_deps/glfw-src/include" -IC:/Users/Hugo/Desktop/Learning/learning_CG/OpenGL/Test2/glad/include -I"C:/Users/Hugo/Desktop/Learning/learning_CG/OpenGL/Test2/_deps/glm-src/glm/.." -isystem C:/PROGRA~1/OpenCV/include

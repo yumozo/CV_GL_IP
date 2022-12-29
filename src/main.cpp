@@ -1,5 +1,13 @@
+// #define 
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <opencv2/opencv.hpp>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <imgui.h>
+#include <imgui_impl_glfw_gl3.h>
 
 #include <iostream>
 #include <fstream>
@@ -15,14 +23,25 @@
 #include "shader.h"
 #include "texture.h"
 
-#include "vendor/glm/glm.hpp"
-#include "vendor/glm/gtc/matrix_transform.hpp"
-#include "vendor/imgui/imgui.h"
-#include "vendor/imgui/imgui_impl_glfw_gl3.h"
-
 #include "tests/test_clear_color.h"
+#include "tests/test_texture_2D.h"
+
+using namespace cv;
 
 int main(void) {
+    Mat image;
+    image = imread("res/textures/somepic.png", 1);
+    if (!image.data) {
+        std::cout << "No image data \n" << std::endl;
+        return -1;
+    }
+    namedWindow("Display Image", WINDOW_AUTOSIZE);
+    imshow("Display Image", image);
+    waitKey(0);
+    return 0;
+
+    // ---
+
     GLFWwindow* window;
 
     /* Initialize the library */
@@ -48,13 +67,14 @@ int main(void) {
     /* init glad  */
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
-    std::cout << glGetString(GL_VERSION) << std::endl;
+    // std::cout << glGetString(GL_VERSION) << std::endl;
     {
         GLCall(glEnable(GL_BLEND));
         GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
         Renderer renderer;
 
+        // Init ImGui, setup
         ImGui::CreateContext();
         ImGui_ImplGlfwGL3_Init(window, true);
         ImGui::StyleColorsDark();
@@ -64,6 +84,7 @@ int main(void) {
         currentTest = testMenu;
 
         testMenu->RegisterTest<test::TestClearColor>("Clear Color");
+        testMenu->RegisterTest<test::TestTexture2D>("2D Texture");
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window)) {

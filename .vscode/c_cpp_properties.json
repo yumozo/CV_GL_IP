@@ -5,8 +5,11 @@
             "includePath": [
                 // "${workspaceFolder}/**",
                 "${workspaceFolder}/src/**",
-                "include/**",
-                "lib/**"
+                "glad/**",
+                "imgui/**",
+                "_deps/**",
+                "include/**", // GLFW, OpenCV
+                "lib/**" // GLFW lib
             ],
             "defines": [
                 "_DEBUG",
