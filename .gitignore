@@ -1,3 +1,8 @@
-*.exe
+_deps
+CMakeFiles
+CMakeCache.txt
+Makefile
+cmake_install.cmake
 
-notes.md
+
+*.exe

@@ -56,10 +56,10 @@ RM = C:\msys64\mingw64\bin\cmake.exe -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2
+CMAKE_SOURCE_DIR = C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2
+CMAKE_BINARY_DIR = C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -131,9 +131,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2\CMakeFiles C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -212,408 +212,173 @@ glfw/fast:
 	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\src\CMakeFiles\glfw.dir\build.make _deps/glfw-build/src/CMakeFiles/glfw.dir/build
 .PHONY : glfw/fast
 
-#=============================================================================
-# Target rules for targets named boing
-
-# Build rule for target.
-boing: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 boing
-.PHONY : boing
-
-# fast build rule for target.
-boing/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\examples\CMakeFiles\boing.dir\build.make _deps/glfw-build/examples/CMakeFiles/boing.dir/build
-.PHONY : boing/fast
-
-#=============================================================================
-# Target rules for targets named gears
-
-# Build rule for target.
-gears: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 gears
-.PHONY : gears
-
-# fast build rule for target.
-gears/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\examples\CMakeFiles\gears.dir\build.make _deps/glfw-build/examples/CMakeFiles/gears.dir/build
-.PHONY : gears/fast
-
-#=============================================================================
-# Target rules for targets named heightmap
-
-# Build rule for target.
-heightmap: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 heightmap
-.PHONY : heightmap
-
-# fast build rule for target.
-heightmap/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\examples\CMakeFiles\heightmap.dir\build.make _deps/glfw-build/examples/CMakeFiles/heightmap.dir/build
-.PHONY : heightmap/fast
-
-#=============================================================================
-# Target rules for targets named offscreen
-
-# Build rule for target.
-offscreen: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 offscreen
-.PHONY : offscreen
-
-# fast build rule for target.
-offscreen/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\examples\CMakeFiles\offscreen.dir\build.make _deps/glfw-build/examples/CMakeFiles/offscreen.dir/build
-.PHONY : offscreen/fast
-
-#=============================================================================
-# Target rules for targets named particles
-
-# Build rule for target.
-particles: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 particles
-.PHONY : particles
-
-# fast build rule for target.
-particles/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\examples\CMakeFiles\particles.dir\build.make _deps/glfw-build/examples/CMakeFiles/particles.dir/build
-.PHONY : particles/fast
-
-#=============================================================================
-# Target rules for targets named sharing
-
-# Build rule for target.
-sharing: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 sharing
-.PHONY : sharing
-
-# fast build rule for target.
-sharing/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\examples\CMakeFiles\sharing.dir\build.make _deps/glfw-build/examples/CMakeFiles/sharing.dir/build
-.PHONY : sharing/fast
-
-#=============================================================================
-# Target rules for targets named simple
-
-# Build rule for target.
-simple: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 simple
-.PHONY : simple
-
-# fast build rule for target.
-simple/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\examples\CMakeFiles\simple.dir\build.make _deps/glfw-build/examples/CMakeFiles/simple.dir/build
-.PHONY : simple/fast
-
-#=============================================================================
-# Target rules for targets named splitview
-
-# Build rule for target.
-splitview: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 splitview
-.PHONY : splitview
-
-# fast build rule for target.
-splitview/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\examples\CMakeFiles\splitview.dir\build.make _deps/glfw-build/examples/CMakeFiles/splitview.dir/build
-.PHONY : splitview/fast
-
-#=============================================================================
-# Target rules for targets named wave
-
-# Build rule for target.
-wave: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 wave
-.PHONY : wave
-
-# fast build rule for target.
-wave/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\examples\CMakeFiles\wave.dir\build.make _deps/glfw-build/examples/CMakeFiles/wave.dir/build
-.PHONY : wave/fast
-
-#=============================================================================
-# Target rules for targets named clipboard
-
-# Build rule for target.
-clipboard: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 clipboard
-.PHONY : clipboard
-
-# fast build rule for target.
-clipboard/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\clipboard.dir\build.make _deps/glfw-build/tests/CMakeFiles/clipboard.dir/build
-.PHONY : clipboard/fast
-
-#=============================================================================
-# Target rules for targets named events
-
-# Build rule for target.
-events: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 events
-.PHONY : events
-
-# fast build rule for target.
-events/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\events.dir\build.make _deps/glfw-build/tests/CMakeFiles/events.dir/build
-.PHONY : events/fast
-
-#=============================================================================
-# Target rules for targets named msaa
-
-# Build rule for target.
-msaa: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 msaa
-.PHONY : msaa
-
-# fast build rule for target.
-msaa/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\msaa.dir\build.make _deps/glfw-build/tests/CMakeFiles/msaa.dir/build
-.PHONY : msaa/fast
-
-#=============================================================================
-# Target rules for targets named glfwinfo
-
-# Build rule for target.
-glfwinfo: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 glfwinfo
-.PHONY : glfwinfo
-
-# fast build rule for target.
-glfwinfo/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\glfwinfo.dir\build.make _deps/glfw-build/tests/CMakeFiles/glfwinfo.dir/build
-.PHONY : glfwinfo/fast
-
-#=============================================================================
-# Target rules for targets named iconify
-
-# Build rule for target.
-iconify: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 iconify
-.PHONY : iconify
-
-# fast build rule for target.
-iconify/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\iconify.dir\build.make _deps/glfw-build/tests/CMakeFiles/iconify.dir/build
-.PHONY : iconify/fast
-
-#=============================================================================
-# Target rules for targets named monitors
-
-# Build rule for target.
-monitors: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 monitors
-.PHONY : monitors
-
-# fast build rule for target.
-monitors/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\monitors.dir\build.make _deps/glfw-build/tests/CMakeFiles/monitors.dir/build
-.PHONY : monitors/fast
-
-#=============================================================================
-# Target rules for targets named reopen
-
-# Build rule for target.
-reopen: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 reopen
-.PHONY : reopen
-
-# fast build rule for target.
-reopen/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\reopen.dir\build.make _deps/glfw-build/tests/CMakeFiles/reopen.dir/build
-.PHONY : reopen/fast
-
-#=============================================================================
-# Target rules for targets named cursor
-
-# Build rule for target.
-cursor: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 cursor
-.PHONY : cursor
-
-# fast build rule for target.
-cursor/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\cursor.dir\build.make _deps/glfw-build/tests/CMakeFiles/cursor.dir/build
-.PHONY : cursor/fast
-
-#=============================================================================
-# Target rules for targets named empty
-
-# Build rule for target.
-empty: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 empty
-.PHONY : empty
-
-# fast build rule for target.
-empty/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\empty.dir\build.make _deps/glfw-build/tests/CMakeFiles/empty.dir/build
-.PHONY : empty/fast
-
-#=============================================================================
-# Target rules for targets named gamma
-
-# Build rule for target.
-gamma: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 gamma
-.PHONY : gamma
-
-# fast build rule for target.
-gamma/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\gamma.dir\build.make _deps/glfw-build/tests/CMakeFiles/gamma.dir/build
-.PHONY : gamma/fast
-
-#=============================================================================
-# Target rules for targets named icon
-
-# Build rule for target.
-icon: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 icon
-.PHONY : icon
-
-# fast build rule for target.
-icon/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\icon.dir\build.make _deps/glfw-build/tests/CMakeFiles/icon.dir/build
-.PHONY : icon/fast
-
-#=============================================================================
-# Target rules for targets named inputlag
-
-# Build rule for target.
-inputlag: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 inputlag
-.PHONY : inputlag
-
-# fast build rule for target.
-inputlag/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\inputlag.dir\build.make _deps/glfw-build/tests/CMakeFiles/inputlag.dir/build
-.PHONY : inputlag/fast
-
-#=============================================================================
-# Target rules for targets named joysticks
-
-# Build rule for target.
-joysticks: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 joysticks
-.PHONY : joysticks
-
-# fast build rule for target.
-joysticks/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\joysticks.dir\build.make _deps/glfw-build/tests/CMakeFiles/joysticks.dir/build
-.PHONY : joysticks/fast
-
-#=============================================================================
-# Target rules for targets named opacity
-
-# Build rule for target.
-opacity: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 opacity
-.PHONY : opacity
-
-# fast build rule for target.
-opacity/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\opacity.dir\build.make _deps/glfw-build/tests/CMakeFiles/opacity.dir/build
-.PHONY : opacity/fast
-
-#=============================================================================
-# Target rules for targets named tearing
-
-# Build rule for target.
-tearing: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 tearing
-.PHONY : tearing
-
-# fast build rule for target.
-tearing/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\tearing.dir\build.make _deps/glfw-build/tests/CMakeFiles/tearing.dir/build
-.PHONY : tearing/fast
-
-#=============================================================================
-# Target rules for targets named threads
-
-# Build rule for target.
-threads: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 threads
-.PHONY : threads
-
-# fast build rule for target.
-threads/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\threads.dir\build.make _deps/glfw-build/tests/CMakeFiles/threads.dir/build
-.PHONY : threads/fast
-
-#=============================================================================
-# Target rules for targets named timeout
-
-# Build rule for target.
-timeout: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 timeout
-.PHONY : timeout
-
-# fast build rule for target.
-timeout/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\timeout.dir\build.make _deps/glfw-build/tests/CMakeFiles/timeout.dir/build
-.PHONY : timeout/fast
-
-#=============================================================================
-# Target rules for targets named title
-
-# Build rule for target.
-title: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 title
-.PHONY : title
-
-# fast build rule for target.
-title/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\title.dir\build.make _deps/glfw-build/tests/CMakeFiles/title.dir/build
-.PHONY : title/fast
-
-#=============================================================================
-# Target rules for targets named triangle-vulkan
-
-# Build rule for target.
-triangle-vulkan: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 triangle-vulkan
-.PHONY : triangle-vulkan
-
-# fast build rule for target.
-triangle-vulkan/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\triangle-vulkan.dir\build.make _deps/glfw-build/tests/CMakeFiles/triangle-vulkan.dir/build
-.PHONY : triangle-vulkan/fast
-
-#=============================================================================
-# Target rules for targets named windows
-
-# Build rule for target.
-windows: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 windows
-.PHONY : windows
-
-# fast build rule for target.
-windows/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\glfw-build\tests\CMakeFiles\windows.dir\build.make _deps/glfw-build/tests/CMakeFiles/windows.dir/build
-.PHONY : windows/fast
-
-#=============================================================================
-# Target rules for targets named glad
-
-# Build rule for target.
-glad: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 glad
-.PHONY : glad
-
-# fast build rule for target.
-glad/fast:
-	$(MAKE) $(MAKESILENT) -f glad\CMakeFiles\glad.dir\build.make glad/CMakeFiles/glad.dir/build
-.PHONY : glad/fast
-
-#=============================================================================
-# Target rules for targets named imgui
-
-# Build rule for target.
-imgui: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 imgui
-.PHONY : imgui
-
-# fast build rule for target.
-imgui/fast:
-	$(MAKE) $(MAKESILENT) -f imgui\CMakeFiles\imgui.dir\build.make imgui/CMakeFiles/imgui.dir/build
-.PHONY : imgui/fast
+include/glad/src/glad.obj: include/glad/src/glad.c.obj
+.PHONY : include/glad/src/glad.obj
+
+# target to build an object file
+include/glad/src/glad.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/include/glad/src/glad.c.obj
+.PHONY : include/glad/src/glad.c.obj
+
+include/glad/src/glad.i: include/glad/src/glad.c.i
+.PHONY : include/glad/src/glad.i
+
+# target to preprocess a source file
+include/glad/src/glad.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/include/glad/src/glad.c.i
+.PHONY : include/glad/src/glad.c.i
+
+include/glad/src/glad.s: include/glad/src/glad.c.s
+.PHONY : include/glad/src/glad.s
+
+# target to generate assembly for a file
+include/glad/src/glad.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/include/glad/src/glad.c.s
+.PHONY : include/glad/src/glad.c.s
+
+include/imgui/imgui.obj: include/imgui/imgui.cpp.obj
+.PHONY : include/imgui/imgui.obj
+
+# target to build an object file
+include/imgui/imgui.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/include/imgui/imgui.cpp.obj
+.PHONY : include/imgui/imgui.cpp.obj
+
+include/imgui/imgui.i: include/imgui/imgui.cpp.i
+.PHONY : include/imgui/imgui.i
+
+# target to preprocess a source file
+include/imgui/imgui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/include/imgui/imgui.cpp.i
+.PHONY : include/imgui/imgui.cpp.i
+
+include/imgui/imgui.s: include/imgui/imgui.cpp.s
+.PHONY : include/imgui/imgui.s
+
+# target to generate assembly for a file
+include/imgui/imgui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/include/imgui/imgui.cpp.s
+.PHONY : include/imgui/imgui.cpp.s
+
+include/imgui/imgui_draw.obj: include/imgui/imgui_draw.cpp.obj
+.PHONY : include/imgui/imgui_draw.obj
+
+# target to build an object file
+include/imgui/imgui_draw.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/include/imgui/imgui_draw.cpp.obj
+.PHONY : include/imgui/imgui_draw.cpp.obj
+
+include/imgui/imgui_draw.i: include/imgui/imgui_draw.cpp.i
+.PHONY : include/imgui/imgui_draw.i
+
+# target to preprocess a source file
+include/imgui/imgui_draw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/include/imgui/imgui_draw.cpp.i
+.PHONY : include/imgui/imgui_draw.cpp.i
+
+include/imgui/imgui_draw.s: include/imgui/imgui_draw.cpp.s
+.PHONY : include/imgui/imgui_draw.s
+
+# target to generate assembly for a file
+include/imgui/imgui_draw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/include/imgui/imgui_draw.cpp.s
+.PHONY : include/imgui/imgui_draw.cpp.s
+
+include/imgui/imgui_impl_glfw_gl3.obj: include/imgui/imgui_impl_glfw_gl3.cpp.obj
+.PHONY : include/imgui/imgui_impl_glfw_gl3.obj
+
+# target to build an object file
+include/imgui/imgui_impl_glfw_gl3.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/include/imgui/imgui_impl_glfw_gl3.cpp.obj
+.PHONY : include/imgui/imgui_impl_glfw_gl3.cpp.obj
+
+include/imgui/imgui_impl_glfw_gl3.i: include/imgui/imgui_impl_glfw_gl3.cpp.i
+.PHONY : include/imgui/imgui_impl_glfw_gl3.i
+
+# target to preprocess a source file
+include/imgui/imgui_impl_glfw_gl3.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/include/imgui/imgui_impl_glfw_gl3.cpp.i
+.PHONY : include/imgui/imgui_impl_glfw_gl3.cpp.i
+
+include/imgui/imgui_impl_glfw_gl3.s: include/imgui/imgui_impl_glfw_gl3.cpp.s
+.PHONY : include/imgui/imgui_impl_glfw_gl3.s
+
+# target to generate assembly for a file
+include/imgui/imgui_impl_glfw_gl3.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/include/imgui/imgui_impl_glfw_gl3.cpp.s
+.PHONY : include/imgui/imgui_impl_glfw_gl3.cpp.s
+
+include/stb_image/stb_image.obj: include/stb_image/stb_image.cpp.obj
+.PHONY : include/stb_image/stb_image.obj
+
+# target to build an object file
+include/stb_image/stb_image.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/include/stb_image/stb_image.cpp.obj
+.PHONY : include/stb_image/stb_image.cpp.obj
+
+include/stb_image/stb_image.i: include/stb_image/stb_image.cpp.i
+.PHONY : include/stb_image/stb_image.i
+
+# target to preprocess a source file
+include/stb_image/stb_image.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/include/stb_image/stb_image.cpp.i
+.PHONY : include/stb_image/stb_image.cpp.i
+
+include/stb_image/stb_image.s: include/stb_image/stb_image.cpp.s
+.PHONY : include/stb_image/stb_image.s
+
+# target to generate assembly for a file
+include/stb_image/stb_image.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/include/stb_image/stb_image.cpp.s
+.PHONY : include/stb_image/stb_image.cpp.s
+
+src/cv_image.obj: src/cv_image.cpp.obj
+.PHONY : src/cv_image.obj
+
+# target to build an object file
+src/cv_image.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/cv_image.cpp.obj
+.PHONY : src/cv_image.cpp.obj
+
+src/cv_image.i: src/cv_image.cpp.i
+.PHONY : src/cv_image.i
+
+# target to preprocess a source file
+src/cv_image.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/cv_image.cpp.i
+.PHONY : src/cv_image.cpp.i
+
+src/cv_image.s: src/cv_image.cpp.s
+.PHONY : src/cv_image.s
+
+# target to generate assembly for a file
+src/cv_image.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/cv_image.cpp.s
+.PHONY : src/cv_image.cpp.s
+
+src/index_buffer.obj: src/index_buffer.cpp.obj
+.PHONY : src/index_buffer.obj
+
+# target to build an object file
+src/index_buffer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/index_buffer.cpp.obj
+.PHONY : src/index_buffer.cpp.obj
+
+src/index_buffer.i: src/index_buffer.cpp.i
+.PHONY : src/index_buffer.i
+
+# target to preprocess a source file
+src/index_buffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/index_buffer.cpp.i
+.PHONY : src/index_buffer.cpp.i
+
+src/index_buffer.s: src/index_buffer.cpp.s
+.PHONY : src/index_buffer.s
+
+# target to generate assembly for a file
+src/index_buffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/index_buffer.cpp.s
+.PHONY : src/index_buffer.cpp.s
 
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
@@ -639,6 +404,198 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/renderer.obj: src/renderer.cpp.obj
+.PHONY : src/renderer.obj
+
+# target to build an object file
+src/renderer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/renderer.cpp.obj
+.PHONY : src/renderer.cpp.obj
+
+src/renderer.i: src/renderer.cpp.i
+.PHONY : src/renderer.i
+
+# target to preprocess a source file
+src/renderer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/renderer.cpp.i
+.PHONY : src/renderer.cpp.i
+
+src/renderer.s: src/renderer.cpp.s
+.PHONY : src/renderer.s
+
+# target to generate assembly for a file
+src/renderer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/renderer.cpp.s
+.PHONY : src/renderer.cpp.s
+
+src/shader.obj: src/shader.cpp.obj
+.PHONY : src/shader.obj
+
+# target to build an object file
+src/shader.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/shader.cpp.obj
+.PHONY : src/shader.cpp.obj
+
+src/shader.i: src/shader.cpp.i
+.PHONY : src/shader.i
+
+# target to preprocess a source file
+src/shader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/shader.cpp.i
+.PHONY : src/shader.cpp.i
+
+src/shader.s: src/shader.cpp.s
+.PHONY : src/shader.s
+
+# target to generate assembly for a file
+src/shader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/shader.cpp.s
+.PHONY : src/shader.cpp.s
+
+src/tests/test.obj: src/tests/test.cpp.obj
+.PHONY : src/tests/test.obj
+
+# target to build an object file
+src/tests/test.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/tests/test.cpp.obj
+.PHONY : src/tests/test.cpp.obj
+
+src/tests/test.i: src/tests/test.cpp.i
+.PHONY : src/tests/test.i
+
+# target to preprocess a source file
+src/tests/test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/tests/test.cpp.i
+.PHONY : src/tests/test.cpp.i
+
+src/tests/test.s: src/tests/test.cpp.s
+.PHONY : src/tests/test.s
+
+# target to generate assembly for a file
+src/tests/test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/tests/test.cpp.s
+.PHONY : src/tests/test.cpp.s
+
+src/tests/test_clear_color.obj: src/tests/test_clear_color.cpp.obj
+.PHONY : src/tests/test_clear_color.obj
+
+# target to build an object file
+src/tests/test_clear_color.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/tests/test_clear_color.cpp.obj
+.PHONY : src/tests/test_clear_color.cpp.obj
+
+src/tests/test_clear_color.i: src/tests/test_clear_color.cpp.i
+.PHONY : src/tests/test_clear_color.i
+
+# target to preprocess a source file
+src/tests/test_clear_color.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/tests/test_clear_color.cpp.i
+.PHONY : src/tests/test_clear_color.cpp.i
+
+src/tests/test_clear_color.s: src/tests/test_clear_color.cpp.s
+.PHONY : src/tests/test_clear_color.s
+
+# target to generate assembly for a file
+src/tests/test_clear_color.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/tests/test_clear_color.cpp.s
+.PHONY : src/tests/test_clear_color.cpp.s
+
+src/tests/test_texture_2D.obj: src/tests/test_texture_2D.cpp.obj
+.PHONY : src/tests/test_texture_2D.obj
+
+# target to build an object file
+src/tests/test_texture_2D.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/tests/test_texture_2D.cpp.obj
+.PHONY : src/tests/test_texture_2D.cpp.obj
+
+src/tests/test_texture_2D.i: src/tests/test_texture_2D.cpp.i
+.PHONY : src/tests/test_texture_2D.i
+
+# target to preprocess a source file
+src/tests/test_texture_2D.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/tests/test_texture_2D.cpp.i
+.PHONY : src/tests/test_texture_2D.cpp.i
+
+src/tests/test_texture_2D.s: src/tests/test_texture_2D.cpp.s
+.PHONY : src/tests/test_texture_2D.s
+
+# target to generate assembly for a file
+src/tests/test_texture_2D.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/tests/test_texture_2D.cpp.s
+.PHONY : src/tests/test_texture_2D.cpp.s
+
+src/texture.obj: src/texture.cpp.obj
+.PHONY : src/texture.obj
+
+# target to build an object file
+src/texture.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/texture.cpp.obj
+.PHONY : src/texture.cpp.obj
+
+src/texture.i: src/texture.cpp.i
+.PHONY : src/texture.i
+
+# target to preprocess a source file
+src/texture.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/texture.cpp.i
+.PHONY : src/texture.cpp.i
+
+src/texture.s: src/texture.cpp.s
+.PHONY : src/texture.s
+
+# target to generate assembly for a file
+src/texture.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/texture.cpp.s
+.PHONY : src/texture.cpp.s
+
+src/vertex_array.obj: src/vertex_array.cpp.obj
+.PHONY : src/vertex_array.obj
+
+# target to build an object file
+src/vertex_array.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/vertex_array.cpp.obj
+.PHONY : src/vertex_array.cpp.obj
+
+src/vertex_array.i: src/vertex_array.cpp.i
+.PHONY : src/vertex_array.i
+
+# target to preprocess a source file
+src/vertex_array.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/vertex_array.cpp.i
+.PHONY : src/vertex_array.cpp.i
+
+src/vertex_array.s: src/vertex_array.cpp.s
+.PHONY : src/vertex_array.s
+
+# target to generate assembly for a file
+src/vertex_array.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/vertex_array.cpp.s
+.PHONY : src/vertex_array.cpp.s
+
+src/vertex_buffer.obj: src/vertex_buffer.cpp.obj
+.PHONY : src/vertex_buffer.obj
+
+# target to build an object file
+src/vertex_buffer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/vertex_buffer.cpp.obj
+.PHONY : src/vertex_buffer.cpp.obj
+
+src/vertex_buffer.i: src/vertex_buffer.cpp.i
+.PHONY : src/vertex_buffer.i
+
+# target to preprocess a source file
+src/vertex_buffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/vertex_buffer.cpp.i
+.PHONY : src/vertex_buffer.cpp.i
+
+src/vertex_buffer.s: src/vertex_buffer.cpp.s
+.PHONY : src/vertex_buffer.s
+
+# target to generate assembly for a file
+src/vertex_buffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/vertex_buffer.cpp.s
+.PHONY : src/vertex_buffer.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -653,42 +610,56 @@ help:
 	@echo ... rebuild_cache
 	@echo ... uninstall
 	@echo ... update_mappings
-	@echo ... boing
-	@echo ... clipboard
-	@echo ... cursor
-	@echo ... empty
-	@echo ... events
-	@echo ... gamma
-	@echo ... gears
-	@echo ... glad
 	@echo ... glfw
-	@echo ... glfwinfo
-	@echo ... heightmap
-	@echo ... icon
-	@echo ... iconify
-	@echo ... imgui
-	@echo ... inputlag
-	@echo ... joysticks
 	@echo ... main
-	@echo ... monitors
-	@echo ... msaa
-	@echo ... offscreen
-	@echo ... opacity
-	@echo ... particles
-	@echo ... reopen
-	@echo ... sharing
-	@echo ... simple
-	@echo ... splitview
-	@echo ... tearing
-	@echo ... threads
-	@echo ... timeout
-	@echo ... title
-	@echo ... triangle-vulkan
-	@echo ... wave
-	@echo ... windows
+	@echo ... include/glad/src/glad.obj
+	@echo ... include/glad/src/glad.i
+	@echo ... include/glad/src/glad.s
+	@echo ... include/imgui/imgui.obj
+	@echo ... include/imgui/imgui.i
+	@echo ... include/imgui/imgui.s
+	@echo ... include/imgui/imgui_draw.obj
+	@echo ... include/imgui/imgui_draw.i
+	@echo ... include/imgui/imgui_draw.s
+	@echo ... include/imgui/imgui_impl_glfw_gl3.obj
+	@echo ... include/imgui/imgui_impl_glfw_gl3.i
+	@echo ... include/imgui/imgui_impl_glfw_gl3.s
+	@echo ... include/stb_image/stb_image.obj
+	@echo ... include/stb_image/stb_image.i
+	@echo ... include/stb_image/stb_image.s
+	@echo ... src/cv_image.obj
+	@echo ... src/cv_image.i
+	@echo ... src/cv_image.s
+	@echo ... src/index_buffer.obj
+	@echo ... src/index_buffer.i
+	@echo ... src/index_buffer.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/renderer.obj
+	@echo ... src/renderer.i
+	@echo ... src/renderer.s
+	@echo ... src/shader.obj
+	@echo ... src/shader.i
+	@echo ... src/shader.s
+	@echo ... src/tests/test.obj
+	@echo ... src/tests/test.i
+	@echo ... src/tests/test.s
+	@echo ... src/tests/test_clear_color.obj
+	@echo ... src/tests/test_clear_color.i
+	@echo ... src/tests/test_clear_color.s
+	@echo ... src/tests/test_texture_2D.obj
+	@echo ... src/tests/test_texture_2D.i
+	@echo ... src/tests/test_texture_2D.s
+	@echo ... src/texture.obj
+	@echo ... src/texture.i
+	@echo ... src/texture.s
+	@echo ... src/vertex_array.obj
+	@echo ... src/vertex_array.i
+	@echo ... src/vertex_array.s
+	@echo ... src/vertex_buffer.obj
+	@echo ... src/vertex_buffer.i
+	@echo ... src/vertex_buffer.s
 .PHONY : help
 
 

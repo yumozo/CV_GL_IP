@@ -52,10 +52,10 @@ RM = C:\msys64\mingw64\bin\cmake.exe -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2
+CMAKE_SOURCE_DIR = C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2
+CMAKE_BINARY_DIR = C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL
 
 # Include any dependencies generated for this target.
 include CMakeFiles/main.dir/depend.make
@@ -72,25 +72,280 @@ CMakeFiles/main.dir/src/main.cpp.obj: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/main.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
 CMakeFiles/main.dir/src/main.cpp.obj: src/main.cpp
 CMakeFiles/main.dir/src/main.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/src/main.cpp.obj"
-	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/main.cpp.obj -MF CMakeFiles\main.dir\src\main.cpp.obj.d -o CMakeFiles\main.dir\src\main.cpp.obj -c C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2\src\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/src/main.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/main.cpp.obj -MF CMakeFiles\main.dir\src\main.cpp.obj.d -o CMakeFiles\main.dir\src\main.cpp.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\main.cpp
 
 CMakeFiles/main.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/main.cpp.i"
-	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2\src\main.cpp > CMakeFiles\main.dir\src\main.cpp.i
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\main.cpp > CMakeFiles\main.dir\src\main.cpp.i
 
 CMakeFiles/main.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/main.cpp.s"
-	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2\src\main.cpp -o CMakeFiles\main.dir\src\main.cpp.s
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\main.cpp -o CMakeFiles\main.dir\src\main.cpp.s
+
+CMakeFiles/main.dir/include/glad/src/glad.c.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/include/glad/src/glad.c.obj: CMakeFiles/main.dir/includes_C.rsp
+CMakeFiles/main.dir/include/glad/src/glad.c.obj: include/glad/src/glad.c
+CMakeFiles/main.dir/include/glad/src/glad.c.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/main.dir/include/glad/src/glad.c.obj"
+	C:\msys64\mingw64\bin\cc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/main.dir/include/glad/src/glad.c.obj -MF CMakeFiles\main.dir\include\glad\src\glad.c.obj.d -o CMakeFiles\main.dir\include\glad\src\glad.c.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\include\glad\src\glad.c
+
+CMakeFiles/main.dir/include/glad/src/glad.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/main.dir/include/glad/src/glad.c.i"
+	C:\msys64\mingw64\bin\cc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\include\glad\src\glad.c > CMakeFiles\main.dir\include\glad\src\glad.c.i
+
+CMakeFiles/main.dir/include/glad/src/glad.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/main.dir/include/glad/src/glad.c.s"
+	C:\msys64\mingw64\bin\cc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\include\glad\src\glad.c -o CMakeFiles\main.dir\include\glad\src\glad.c.s
+
+CMakeFiles/main.dir/src/renderer.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/renderer.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/src/renderer.cpp.obj: src/renderer.cpp
+CMakeFiles/main.dir/src/renderer.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/src/renderer.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/renderer.cpp.obj -MF CMakeFiles\main.dir\src\renderer.cpp.obj.d -o CMakeFiles\main.dir\src\renderer.cpp.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\renderer.cpp
+
+CMakeFiles/main.dir/src/renderer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/renderer.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\renderer.cpp > CMakeFiles\main.dir\src\renderer.cpp.i
+
+CMakeFiles/main.dir/src/renderer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/renderer.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\renderer.cpp -o CMakeFiles\main.dir\src\renderer.cpp.s
+
+CMakeFiles/main.dir/src/index_buffer.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/index_buffer.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/src/index_buffer.cpp.obj: src/index_buffer.cpp
+CMakeFiles/main.dir/src/index_buffer.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main.dir/src/index_buffer.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/index_buffer.cpp.obj -MF CMakeFiles\main.dir\src\index_buffer.cpp.obj.d -o CMakeFiles\main.dir\src\index_buffer.cpp.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\index_buffer.cpp
+
+CMakeFiles/main.dir/src/index_buffer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/index_buffer.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\index_buffer.cpp > CMakeFiles\main.dir\src\index_buffer.cpp.i
+
+CMakeFiles/main.dir/src/index_buffer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/index_buffer.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\index_buffer.cpp -o CMakeFiles\main.dir\src\index_buffer.cpp.s
+
+CMakeFiles/main.dir/src/shader.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/shader.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/src/shader.cpp.obj: src/shader.cpp
+CMakeFiles/main.dir/src/shader.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main.dir/src/shader.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/shader.cpp.obj -MF CMakeFiles\main.dir\src\shader.cpp.obj.d -o CMakeFiles\main.dir\src\shader.cpp.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\shader.cpp
+
+CMakeFiles/main.dir/src/shader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/shader.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\shader.cpp > CMakeFiles\main.dir\src\shader.cpp.i
+
+CMakeFiles/main.dir/src/shader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/shader.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\shader.cpp -o CMakeFiles\main.dir\src\shader.cpp.s
+
+CMakeFiles/main.dir/src/texture.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/texture.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/src/texture.cpp.obj: src/texture.cpp
+CMakeFiles/main.dir/src/texture.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/main.dir/src/texture.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/texture.cpp.obj -MF CMakeFiles\main.dir\src\texture.cpp.obj.d -o CMakeFiles\main.dir\src\texture.cpp.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\texture.cpp
+
+CMakeFiles/main.dir/src/texture.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/texture.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\texture.cpp > CMakeFiles\main.dir\src\texture.cpp.i
+
+CMakeFiles/main.dir/src/texture.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/texture.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\texture.cpp -o CMakeFiles\main.dir\src\texture.cpp.s
+
+CMakeFiles/main.dir/src/vertex_array.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/vertex_array.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/src/vertex_array.cpp.obj: src/vertex_array.cpp
+CMakeFiles/main.dir/src/vertex_array.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/main.dir/src/vertex_array.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/vertex_array.cpp.obj -MF CMakeFiles\main.dir\src\vertex_array.cpp.obj.d -o CMakeFiles\main.dir\src\vertex_array.cpp.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\vertex_array.cpp
+
+CMakeFiles/main.dir/src/vertex_array.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/vertex_array.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\vertex_array.cpp > CMakeFiles\main.dir\src\vertex_array.cpp.i
+
+CMakeFiles/main.dir/src/vertex_array.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/vertex_array.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\vertex_array.cpp -o CMakeFiles\main.dir\src\vertex_array.cpp.s
+
+CMakeFiles/main.dir/src/vertex_buffer.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/vertex_buffer.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/src/vertex_buffer.cpp.obj: src/vertex_buffer.cpp
+CMakeFiles/main.dir/src/vertex_buffer.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/main.dir/src/vertex_buffer.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/vertex_buffer.cpp.obj -MF CMakeFiles\main.dir\src\vertex_buffer.cpp.obj.d -o CMakeFiles\main.dir\src\vertex_buffer.cpp.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\vertex_buffer.cpp
+
+CMakeFiles/main.dir/src/vertex_buffer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/vertex_buffer.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\vertex_buffer.cpp > CMakeFiles\main.dir\src\vertex_buffer.cpp.i
+
+CMakeFiles/main.dir/src/vertex_buffer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/vertex_buffer.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\vertex_buffer.cpp -o CMakeFiles\main.dir\src\vertex_buffer.cpp.s
+
+CMakeFiles/main.dir/src/cv_image.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/cv_image.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/src/cv_image.cpp.obj: src/cv_image.cpp
+CMakeFiles/main.dir/src/cv_image.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/main.dir/src/cv_image.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/cv_image.cpp.obj -MF CMakeFiles\main.dir\src\cv_image.cpp.obj.d -o CMakeFiles\main.dir\src\cv_image.cpp.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\cv_image.cpp
+
+CMakeFiles/main.dir/src/cv_image.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/cv_image.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\cv_image.cpp > CMakeFiles\main.dir\src\cv_image.cpp.i
+
+CMakeFiles/main.dir/src/cv_image.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/cv_image.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\cv_image.cpp -o CMakeFiles\main.dir\src\cv_image.cpp.s
+
+CMakeFiles/main.dir/include/stb_image/stb_image.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/include/stb_image/stb_image.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/include/stb_image/stb_image.cpp.obj: include/stb_image/stb_image.cpp
+CMakeFiles/main.dir/include/stb_image/stb_image.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/main.dir/include/stb_image/stb_image.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/include/stb_image/stb_image.cpp.obj -MF CMakeFiles\main.dir\include\stb_image\stb_image.cpp.obj.d -o CMakeFiles\main.dir\include\stb_image\stb_image.cpp.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\include\stb_image\stb_image.cpp
+
+CMakeFiles/main.dir/include/stb_image/stb_image.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/include/stb_image/stb_image.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\include\stb_image\stb_image.cpp > CMakeFiles\main.dir\include\stb_image\stb_image.cpp.i
+
+CMakeFiles/main.dir/include/stb_image/stb_image.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/include/stb_image/stb_image.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\include\stb_image\stb_image.cpp -o CMakeFiles\main.dir\include\stb_image\stb_image.cpp.s
+
+CMakeFiles/main.dir/include/imgui/imgui.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/include/imgui/imgui.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/include/imgui/imgui.cpp.obj: include/imgui/imgui.cpp
+CMakeFiles/main.dir/include/imgui/imgui.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/main.dir/include/imgui/imgui.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/include/imgui/imgui.cpp.obj -MF CMakeFiles\main.dir\include\imgui\imgui.cpp.obj.d -o CMakeFiles\main.dir\include\imgui\imgui.cpp.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\include\imgui\imgui.cpp
+
+CMakeFiles/main.dir/include/imgui/imgui.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/include/imgui/imgui.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\include\imgui\imgui.cpp > CMakeFiles\main.dir\include\imgui\imgui.cpp.i
+
+CMakeFiles/main.dir/include/imgui/imgui.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/include/imgui/imgui.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\include\imgui\imgui.cpp -o CMakeFiles\main.dir\include\imgui\imgui.cpp.s
+
+CMakeFiles/main.dir/include/imgui/imgui_draw.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/include/imgui/imgui_draw.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/include/imgui/imgui_draw.cpp.obj: include/imgui/imgui_draw.cpp
+CMakeFiles/main.dir/include/imgui/imgui_draw.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/main.dir/include/imgui/imgui_draw.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/include/imgui/imgui_draw.cpp.obj -MF CMakeFiles\main.dir\include\imgui\imgui_draw.cpp.obj.d -o CMakeFiles\main.dir\include\imgui\imgui_draw.cpp.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\include\imgui\imgui_draw.cpp
+
+CMakeFiles/main.dir/include/imgui/imgui_draw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/include/imgui/imgui_draw.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\include\imgui\imgui_draw.cpp > CMakeFiles\main.dir\include\imgui\imgui_draw.cpp.i
+
+CMakeFiles/main.dir/include/imgui/imgui_draw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/include/imgui/imgui_draw.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\include\imgui\imgui_draw.cpp -o CMakeFiles\main.dir\include\imgui\imgui_draw.cpp.s
+
+CMakeFiles/main.dir/include/imgui/imgui_impl_glfw_gl3.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/include/imgui/imgui_impl_glfw_gl3.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/include/imgui/imgui_impl_glfw_gl3.cpp.obj: include/imgui/imgui_impl_glfw_gl3.cpp
+CMakeFiles/main.dir/include/imgui/imgui_impl_glfw_gl3.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/main.dir/include/imgui/imgui_impl_glfw_gl3.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/include/imgui/imgui_impl_glfw_gl3.cpp.obj -MF CMakeFiles\main.dir\include\imgui\imgui_impl_glfw_gl3.cpp.obj.d -o CMakeFiles\main.dir\include\imgui\imgui_impl_glfw_gl3.cpp.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\include\imgui\imgui_impl_glfw_gl3.cpp
+
+CMakeFiles/main.dir/include/imgui/imgui_impl_glfw_gl3.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/include/imgui/imgui_impl_glfw_gl3.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\include\imgui\imgui_impl_glfw_gl3.cpp > CMakeFiles\main.dir\include\imgui\imgui_impl_glfw_gl3.cpp.i
+
+CMakeFiles/main.dir/include/imgui/imgui_impl_glfw_gl3.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/include/imgui/imgui_impl_glfw_gl3.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\include\imgui\imgui_impl_glfw_gl3.cpp -o CMakeFiles\main.dir\include\imgui\imgui_impl_glfw_gl3.cpp.s
+
+CMakeFiles/main.dir/src/tests/test.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/tests/test.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/src/tests/test.cpp.obj: src/tests/test.cpp
+CMakeFiles/main.dir/src/tests/test.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/main.dir/src/tests/test.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/tests/test.cpp.obj -MF CMakeFiles\main.dir\src\tests\test.cpp.obj.d -o CMakeFiles\main.dir\src\tests\test.cpp.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\tests\test.cpp
+
+CMakeFiles/main.dir/src/tests/test.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/tests/test.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\tests\test.cpp > CMakeFiles\main.dir\src\tests\test.cpp.i
+
+CMakeFiles/main.dir/src/tests/test.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/tests/test.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\tests\test.cpp -o CMakeFiles\main.dir\src\tests\test.cpp.s
+
+CMakeFiles/main.dir/src/tests/test_clear_color.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/tests/test_clear_color.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/src/tests/test_clear_color.cpp.obj: src/tests/test_clear_color.cpp
+CMakeFiles/main.dir/src/tests/test_clear_color.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/main.dir/src/tests/test_clear_color.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/tests/test_clear_color.cpp.obj -MF CMakeFiles\main.dir\src\tests\test_clear_color.cpp.obj.d -o CMakeFiles\main.dir\src\tests\test_clear_color.cpp.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\tests\test_clear_color.cpp
+
+CMakeFiles/main.dir/src/tests/test_clear_color.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/tests/test_clear_color.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\tests\test_clear_color.cpp > CMakeFiles\main.dir\src\tests\test_clear_color.cpp.i
+
+CMakeFiles/main.dir/src/tests/test_clear_color.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/tests/test_clear_color.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\tests\test_clear_color.cpp -o CMakeFiles\main.dir\src\tests\test_clear_color.cpp.s
+
+CMakeFiles/main.dir/src/tests/test_texture_2D.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/tests/test_texture_2D.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/src/tests/test_texture_2D.cpp.obj: src/tests/test_texture_2D.cpp
+CMakeFiles/main.dir/src/tests/test_texture_2D.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/main.dir/src/tests/test_texture_2D.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/tests/test_texture_2D.cpp.obj -MF CMakeFiles\main.dir\src\tests\test_texture_2D.cpp.obj.d -o CMakeFiles\main.dir\src\tests\test_texture_2D.cpp.obj -c C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\tests\test_texture_2D.cpp
+
+CMakeFiles/main.dir/src/tests/test_texture_2D.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/tests/test_texture_2D.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\tests\test_texture_2D.cpp > CMakeFiles\main.dir\src\tests\test_texture_2D.cpp.i
+
+CMakeFiles/main.dir/src/tests/test_texture_2D.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/tests/test_texture_2D.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\src\tests\test_texture_2D.cpp -o CMakeFiles\main.dir\src\tests\test_texture_2D.cpp.s
 
 # Object files for target main
 main_OBJECTS = \
-"CMakeFiles/main.dir/src/main.cpp.obj"
+"CMakeFiles/main.dir/src/main.cpp.obj" \
+"CMakeFiles/main.dir/include/glad/src/glad.c.obj" \
+"CMakeFiles/main.dir/src/renderer.cpp.obj" \
+"CMakeFiles/main.dir/src/index_buffer.cpp.obj" \
+"CMakeFiles/main.dir/src/shader.cpp.obj" \
+"CMakeFiles/main.dir/src/texture.cpp.obj" \
+"CMakeFiles/main.dir/src/vertex_array.cpp.obj" \
+"CMakeFiles/main.dir/src/vertex_buffer.cpp.obj" \
+"CMakeFiles/main.dir/src/cv_image.cpp.obj" \
+"CMakeFiles/main.dir/include/stb_image/stb_image.cpp.obj" \
+"CMakeFiles/main.dir/include/imgui/imgui.cpp.obj" \
+"CMakeFiles/main.dir/include/imgui/imgui_draw.cpp.obj" \
+"CMakeFiles/main.dir/include/imgui/imgui_impl_glfw_gl3.cpp.obj" \
+"CMakeFiles/main.dir/src/tests/test.cpp.obj" \
+"CMakeFiles/main.dir/src/tests/test_clear_color.cpp.obj" \
+"CMakeFiles/main.dir/src/tests/test_texture_2D.cpp.obj"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
 main.exe: CMakeFiles/main.dir/src/main.cpp.obj
+main.exe: CMakeFiles/main.dir/include/glad/src/glad.c.obj
+main.exe: CMakeFiles/main.dir/src/renderer.cpp.obj
+main.exe: CMakeFiles/main.dir/src/index_buffer.cpp.obj
+main.exe: CMakeFiles/main.dir/src/shader.cpp.obj
+main.exe: CMakeFiles/main.dir/src/texture.cpp.obj
+main.exe: CMakeFiles/main.dir/src/vertex_array.cpp.obj
+main.exe: CMakeFiles/main.dir/src/vertex_buffer.cpp.obj
+main.exe: CMakeFiles/main.dir/src/cv_image.cpp.obj
+main.exe: CMakeFiles/main.dir/include/stb_image/stb_image.cpp.obj
+main.exe: CMakeFiles/main.dir/include/imgui/imgui.cpp.obj
+main.exe: CMakeFiles/main.dir/include/imgui/imgui_draw.cpp.obj
+main.exe: CMakeFiles/main.dir/include/imgui/imgui_impl_glfw_gl3.cpp.obj
+main.exe: CMakeFiles/main.dir/src/tests/test.cpp.obj
+main.exe: CMakeFiles/main.dir/src/tests/test_clear_color.cpp.obj
+main.exe: CMakeFiles/main.dir/src/tests/test_texture_2D.cpp.obj
 main.exe: CMakeFiles/main.dir/build.make
 main.exe: C:/Program\ Files/OpenCV/x64/mingw/lib/libopencv_gapi460.dll.a
 main.exe: C:/Program\ Files/OpenCV/x64/mingw/lib/libopencv_highgui460.dll.a
@@ -100,7 +355,7 @@ main.exe: C:/Program\ Files/OpenCV/x64/mingw/lib/libopencv_photo460.dll.a
 main.exe: C:/Program\ Files/OpenCV/x64/mingw/lib/libopencv_stitching460.dll.a
 main.exe: C:/Program\ Files/OpenCV/x64/mingw/lib/libopencv_video460.dll.a
 main.exe: C:/Program\ Files/OpenCV/x64/mingw/lib/libopencv_videoio460.dll.a
-main.exe: imgui/libimgui.a
+main.exe: _deps/glfw-build/src/libglfw3.a
 main.exe: C:/Program\ Files/OpenCV/x64/mingw/lib/libopencv_imgcodecs460.dll.a
 main.exe: C:/Program\ Files/OpenCV/x64/mingw/lib/libopencv_dnn460.dll.a
 main.exe: C:/Program\ Files/OpenCV/x64/mingw/lib/libopencv_calib3d460.dll.a
@@ -108,12 +363,10 @@ main.exe: C:/Program\ Files/OpenCV/x64/mingw/lib/libopencv_features2d460.dll.a
 main.exe: C:/Program\ Files/OpenCV/x64/mingw/lib/libopencv_flann460.dll.a
 main.exe: C:/Program\ Files/OpenCV/x64/mingw/lib/libopencv_imgproc460.dll.a
 main.exe: C:/Program\ Files/OpenCV/x64/mingw/lib/libopencv_core460.dll.a
-main.exe: _deps/glfw-build/src/libglfw3.a
-main.exe: glad/libglad.a
 main.exe: CMakeFiles/main.dir/linkLibs.rsp
 main.exe: CMakeFiles/main.dir/objects1
 main.exe: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable main.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable main.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\main.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -125,6 +378,6 @@ CMakeFiles/main.dir/clean:
 .PHONY : CMakeFiles/main.dir/clean
 
 CMakeFiles/main.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2 C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2 C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2 C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2 C:\Users\Hugo\Desktop\Learning\learning_CG\OpenGL\Test2\CMakeFiles\main.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL C:\Users\Hugo\Desktop\L\CG\OpenGL\OpenCV_Tuto_with_GL\CMakeFiles\main.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/main.dir/depend
 

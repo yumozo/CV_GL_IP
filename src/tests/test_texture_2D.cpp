@@ -1,10 +1,11 @@
 #include "test_texture_2D.h"
 
 #include "../renderer.h"
-#include "../vendor/imgui/imgui.h"
+// #include <imgui/imgui.h>
+#include "../../include/imgui/imgui.h"
 
-#include "../vendor/glm/glm.hpp"
-#include "../vendor/glm/gtc/matrix_transform.hpp"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace test {
 TestTexture2D::TestTexture2D()

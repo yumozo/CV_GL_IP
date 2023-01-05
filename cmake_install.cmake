@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Hugo/Desktop/Learning/learning_CG/OpenGL/Test2
+# Install script for directory: C:/Users/Hugo/Desktop/L/CG/OpenGL/OpenCV_Tuto_with_GL
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/DisplayImage")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/main")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -39,22 +39,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/Hugo/Desktop/Learning/learning_CG/OpenGL/Test2/_deps/glfw-build/cmake_install.cmake")
+  include("C:/Users/Hugo/Desktop/L/CG/OpenGL/OpenCV_Tuto_with_GL/_deps/glfw-build/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/Hugo/Desktop/Learning/learning_CG/OpenGL/Test2/_deps/glm-build/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("C:/Users/Hugo/Desktop/Learning/learning_CG/OpenGL/Test2/glad/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("C:/Users/Hugo/Desktop/Learning/learning_CG/OpenGL/Test2/imgui/cmake_install.cmake")
+  include("C:/Users/Hugo/Desktop/L/CG/OpenGL/OpenCV_Tuto_with_GL/_deps/glm-build/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -65,5 +55,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Hugo/Desktop/Learning/learning_CG/OpenGL/Test2/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/Hugo/Desktop/L/CG/OpenGL/OpenCV_Tuto_with_GL/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
