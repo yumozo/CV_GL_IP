@@ -23,6 +23,7 @@
 #include "shader.h"
 #include "texture.h"
 #include "cv_image.h"
+#include "filtering.h"
 
 #include "tests/test_clear_color.h"
 #include "tests/test_texture_2D.h"
@@ -71,14 +72,25 @@ int main( void ) {
         testMenu->RegisterTest<test::TestTexture2D>( "2D Texture" );
 
         /* IMAGE PROCESSING */
-        cv::Mat sourceImage = cv::imread( "res/textures/somepic.png" );
-        cv::Mat processingImage;
-        /* Test control slider */
+        /* The sourse image -- original one container */
+        cv::Mat srcImage = cv::imread( "res/textures/tiger.jpg" );
+        /* The second container for the processed image */
+        cv::Mat prcingImage = srcImage.clone();
+        cv::Mat prcedImage;
+        cv::Mat prcedImage1;
+
+        /* Control slider -- testing */
         static float ctrlVl = 1;
         static int gbVal = 3;
+        static int thrMinVal = 0;
+        static int thrMaxVal = 255;
+        static int cannyMinVal = 100;
+        static int cannyMaxVal = 200;
 
-        static bool showSourceImageWindow = false;
-        static bool showProcessedImageWindow = false;
+        static bool srcImWin_IsShowing = false;
+        static bool prcedImWin_IsShowing = false;
+        static bool cannyIsDone = false;
+        static bool sobelIsDone = false;
 
         /* Loop until the user closes the window */
         while ( !glfwWindowShouldClose( window ) ) {
@@ -98,7 +110,6 @@ int main( void ) {
                 currentTest->OnImGuiRender();
                 ImGui::End();
             }
-
             /* OpenCV image in ImGui window */
             /* Image Processing Window */
             ImGui::Begin( "Image Processing" );
@@ -107,60 +118,48 @@ int main( void ) {
             ImGui::SliderFloat( "Identity (brightness)", &ctrlVl, 0, 1 );
             ImGui::Text( "Built-in functions" );
             ImGui::SliderInt( "Gaussian Blur", &gbVal, 3, 55 );
+            ImGui::Columns( 2 );
+            ImGui::SliderInt( "Threshold Min", &thrMinVal, 0, 255 );
+            ImGui::NextColumn();
+            ImGui::SliderInt( "Threshold Max", &thrMaxVal, 0, 255 );
+            ImGui::NextColumn();
+            ImGui::SliderInt( "Canny Min", &cannyMinVal, 0, 255 );
+            ImGui::NextColumn();
+            ImGui::SliderInt( "Canny Max", &cannyMaxVal, 0, 255 );
+            ImGui::Columns( 1 );
 
-            /* Identity kernel */
-            cv::Mat testKernel =
-                ( cv::Mat_<double>( 3, 3 ) << 0, 0, 0, 0, ctrlVl, 0, 0, 0, 0 );
-            cv::filter2D( sourceImage, processingImage, -1, testKernel,
-                          cv::Point( -1, -1 ), 4 );
-            /* Built-in Gaussian Blur */
-            if ( gbVal % 2 == 0 ) gbVal += 1;
-            cv::GaussianBlur( sourceImage, processingImage,
-                              cv::Size( gbVal, gbVal ), 0., 0. );
+            ImGui::Text( "Add checkboxes" );
+
+            prcedImage = Filtering::Brightness( prcingImage, &ctrlVl );
+            prcedImage1 = Filtering::GaussianBlur( prcedImage, &gbVal );
+            prcedImage = Filtering::Thresholding(
+                prcedImage1, &thrMinVal, &thrMaxVal, cv::THRESH_BINARY );
+
+            if ( ImGui::Button( "Apply Sobel edge detection" ) &&
+                 !sobelIsDone ) {
+                /* Show the image in the separated window */
+                Filtering::SobelEdgeDet( srcImage, 1, 1 );
+                sobelIsDone = true;
+            }
+
+            if ( ImGui::Button( "Apply Canny edge detection" ) &&
+                 !cannyIsDone ) {
+                /* Show the image in the separated window */
+                Filtering::CannyEdgeDet( srcImage, cannyMinVal,
+                                         cannyMaxVal );
+                cannyIsDone = true;
+            }
+
+            /* Final result (idk how to work with multiple filters tho) */
+            // prcedImage = prcedImage + prcedImage1;
 
             /* Open/Close the Image Window */
             if ( ImGui::Button( "Open Source Image" ) ) {
-                showSourceImageWindow = !showSourceImageWindow;
+                srcImWin_IsShowing = !srcImWin_IsShowing;
             }
             /* Source Image Window */
-            if ( showSourceImageWindow ) {
-                if ( !ImGui::Begin( "Source Image", &showSourceImageWindow ) ) {
-                    ImGui::End();
-                } else {
-                    // if ( ImGui::Button( "Close OpenCV Window" ) &&
-                    //      showMainCVWindow ) {
-                    //     showMainCVWindow = !showMainCVWindow;
-                    // }
-                    GLuint texture;
-                    GLCall( glGenTextures( 1, &texture ) );
-                    GLCall( glBindTexture( GL_TEXTURE_2D, texture ) );
-                    GLCall( glTexParameteri(
-                        GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR ) );
-                    GLCall( glTexParameteri(
-                        GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR ) );
-                    GLCall( glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 ) );
-                    /* Don't use RGBA format, idk why but it doesn't do
-                     * anything with it */
-                    GLCall( glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB,
-                                          sourceImage.cols, sourceImage.rows, 0,
-                                          GL_RGB, GL_UNSIGNED_BYTE,
-                                          sourceImage.ptr() ) );
-                    ImGui::Image( reinterpret_cast<void*>(
-                                      static_cast<intptr_t>( texture ) ),
-                                  ImVec2( sourceImage.cols * .5f,
-                                          sourceImage.rows * .5f ),
-                                  ImVec2( 0.f, 0.f ), ImVec2( 1.f, 1.f ) );
-                    ImGui::End();
-                }
-            }
-            /* PROCESSED IMAGE WINDOW */
-            if ( ImGui::Button( "Open Processed Image" ) ) {
-                showProcessedImageWindow = !showProcessedImageWindow;
-            }
-            /* Source Image Window */
-            if ( showProcessedImageWindow ) {
-                if ( !ImGui::Begin( "Processing Image",
-                                    &showProcessedImageWindow ) ) {
+            if ( srcImWin_IsShowing ) {
+                if ( !ImGui::Begin( "Source Image", &srcImWin_IsShowing ) ) {
                     ImGui::End();
                 } else {
                     // if ( ImGui::Button( "Close OpenCV Window" ) &&
@@ -178,15 +177,50 @@ int main( void ) {
                     /* Don't use RGBA format, idk why but it doesn't do
                      * anything with it */
                     GLCall( glTexImage2D(
-                        GL_TEXTURE_2D, 0, GL_RGB, sourceImage.cols,
-                        sourceImage.rows, 0, GL_RGB,
-                        /* pointer to the processing image */
-                        GL_UNSIGNED_BYTE, processingImage.ptr() ) );
-                    ImGui::Image( reinterpret_cast<void*>(
-                                      static_cast<intptr_t>( texture ) ),
-                                  ImVec2( sourceImage.cols * .5f,
-                                          sourceImage.rows * .5f ),
-                                  ImVec2( 0.f, 0.f ), ImVec2( 1.f, 1.f ) );
+                        GL_TEXTURE_2D, 0, GL_RGB, srcImage.cols, srcImage.rows,
+                        0, GL_RGB, GL_UNSIGNED_BYTE, srcImage.ptr() ) );
+                    ImGui::Image(
+                        reinterpret_cast<void*>(
+                            static_cast<intptr_t>( texture ) ),
+                        ImVec2( srcImage.cols * .5f, srcImage.rows * .5f ),
+                        ImVec2( 0.f, 0.f ), ImVec2( 1.f, 1.f ) );
+                    ImGui::End();
+                }
+            }
+            /* THE WINDOW FOR THE PROCESSED IMAGE */
+            if ( ImGui::Button( "Open Processed Image" ) ) {
+                prcedImWin_IsShowing = !prcedImWin_IsShowing;
+            }
+            /* THE WINDOW FOR THE SOURCE IMAGE */
+            if ( prcedImWin_IsShowing ) {
+                if ( !ImGui::Begin( "Processing Image",
+                                    &prcedImWin_IsShowing ) ) {
+                    ImGui::End();
+                } else {
+                    // if ( ImGui::Button( "Close OpenCV Window" ) &&
+                    //      showMainCVWindow ) {
+                    //     showMainCVWindow = !showMainCVWindow;
+                    // }
+                    GLuint texture;
+                    GLCall( glGenTextures( 1, &texture ) );
+                    GLCall( glBindTexture( GL_TEXTURE_2D, texture ) );
+                    GLCall( glTexParameteri(
+                        GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR ) );
+                    GLCall( glTexParameteri(
+                        GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR ) );
+                    GLCall( glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 ) );
+                    /* Don't use RGBA format, idk why but it doesn't do
+                     * anything with it */
+                    GLCall(
+                        glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, srcImage.cols,
+                                      srcImage.rows, 0, GL_RGB,
+                                      /* pointer to the processing image */
+                                      GL_UNSIGNED_BYTE, prcedImage.ptr() ) );
+                    ImGui::Image(
+                        reinterpret_cast<void*>(
+                            static_cast<intptr_t>( texture ) ),
+                        ImVec2( srcImage.cols * .5f, srcImage.rows * .5f ),
+                        ImVec2( 0.f, 0.f ), ImVec2( 1.f, 1.f ) );
                     ImGui::End();
                 }
             }
