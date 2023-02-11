@@ -15,9 +15,11 @@ class Filtering {
    private:
     static cv::Mat EdgeDetPrep( cv::Mat prcingImg );
    public:
-    static cv::Mat Brightness( cv::Mat prcingImage, float *ctrlVal );
-    static cv::Mat GaussianBlur( cv::Mat prcingImage, int *ctrlVal );
-    static cv::Mat Thresholding( cv::Mat prcingImage, int *minVal, int *maxVal,
+    static cv::Mat Brightness( cv::Mat *prcingImage, float *ctrlVal );
+    static cv::Mat Contrast( cv::Mat *prcingImage, float *ctrlVal );
+    static cv::Mat GaussianBlur( cv::Mat *prcingImage, int *ctrlVal );
+    static cv::Mat MedianBlur( cv::Mat *prcingImage, int *ctrlVal );
+    static cv::Mat Thresholding( cv::Mat *prcingImage, int *minVal, int *maxVal,
                                  cv::ThresholdTypes thrType );
     static cv::Mat SobelEdgeDet(cv::Mat prcingImg, int x, int y);
     static cv::Mat CannyEdgeDet(cv::Mat prcingImg, int thrMin, int thrMax);

@@ -66,6 +66,7 @@ add_executable(main
   ${SRC_DIR}/vertex_buffer.cpp
   ${SRC_DIR}/cv_image.cpp
   ${SRC_DIR}/filtering.cpp
+  ${SRC_DIR}/custom_filtering.cpp
 
   ${INC_DIR}/stb_image/stb_image.cpp
 
