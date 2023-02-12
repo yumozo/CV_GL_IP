@@ -45,7 +45,7 @@ cv::Mat Filtering::MedianBlur( cv::Mat *prcingImage, int *ctrlVal ) {
 
 cv::Mat Filtering::Thresholding(
     cv::Mat *prcingImage, int *minVal, int *maxVal,
-    cv::ThresholdTypes thrType = cv::THRESH_BINARY ) {
+    cv::ThresholdTypes thrType) {
     cv::Mat prcedImage;
     cv::threshold( *prcingImage, prcedImage, *minVal, *maxVal, thrType );
     return prcedImage;

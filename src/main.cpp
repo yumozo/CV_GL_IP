@@ -26,6 +26,7 @@
 #include "cv_image.h"
 #include "filtering.h"
 #include "custom_filtering.h"
+#include "texture_cv.h"
 
 #include "tests/test_clear_color.h"
 #include "tests/test_texture_2D.h"
@@ -77,20 +78,27 @@ int main( void ) {
         testMenu->RegisterTest<test::TestTexture2D>( "2D Texture" );
         // testMenu->RegisterTest<test:Testcvimage>
 
+        /* Test texture for the CV image window */
+        TextureCV testCVTex( "res/textures/tiger.jpg" );
+
         /* IMAGE PROCESSING */
         GLuint srcImTexture;
         GLuint prcImTexture;
+        GLuint hsvImTexture;
         GLCall( glGenTextures( 1, &srcImTexture ) );
         GLCall( glGenTextures( 1, &prcImTexture ) );
+        GLCall( glGenTextures( 1, &hsvImTexture ) );
         /* The sourse image -- original one container */
         cv::Mat srcImage = cv::imread( "res/textures/tiger.jpg" );
         /* The second container for the processed image */
         cv::Mat prcingImage = srcImage.clone();
         cv::Mat prcedImage = srcImage.clone();
         cv::Mat prcedImage1;
+        cv::Mat hsvImage = srcImage.clone();
 
-        /* Control slider -- testing */
+        /* Filters parameters */
         static float brVl = 1;
+        static float brVl1 = 1;
         static float cntVl = 1;
         static int gbVal = 3;
         static int mdbVal = 3;
@@ -98,16 +106,27 @@ int main( void ) {
         static int thrMaxVal = 255;
         static int cannyMinVal = 100;
         static int cannyMaxVal = 200;
-
+        /* Filters on/off */
         static bool brightnessIsOn = false;
         static bool contrastIsOn = false;
         static bool gbIsOn = false;
         static bool mdbIsOn = false;
         static bool thrIsOn = false;
-
+        /* HSV convert and edit */
+        static float h = .2f;
+        static float s = .2f;
+        static float v = .2f;
+        static float colors[3] = { h, s, v };
+        /* Show/off hsv editable image */
+        static bool hsvMenu_IsShowing = false;
+        /* Show/off src, processed images */
+        static bool cvTestWin_IsOpen = false;
         static bool srcImWin_IsShowing = false;
         static bool prcedImWin_IsShowing = false;
-
+        /* Arithmetics */
+        static char frstImPath[255];
+        static char scndImPath[255];
+        char buf[255]{};
         /* Loop until the user closes the window */
         while ( !glfwWindowShouldClose( window ) ) {
             GLCall( glClearColor( 0.f, 0.f, 0.f, 1.f ) );
@@ -220,29 +239,82 @@ int main( void ) {
                     }
                     ImGui::Separator();
                     if ( ImGui::MenuItem( "To HSV" ) ) {
+                        hsvMenu_IsShowing = !hsvMenu_IsShowing;
                     }
                     ImGui::EndMenu();
                 }
                 ImGui::EndMainMenuBar();
             }
 
+            /* REMOVE THIS IF ALL WORKS - BEGIN */
+
+            // ImGui::Text( "2D-Convolution Kernel" );
+            // ImGui::SliderFloat( "Brightness", &brVl, 0, 3 );
+            // prcedImage = Filtering::Brightness( &prcingImage, &brVl );
+            // ImGui::Text( "Built-in functions" );
+            // ImGui::SliderFloat( "Contrast", &cntVl, 0.001, 5 );
+            // prcedImage = Filtering::Contrast( &prcedImage, &cntVl );
+            // ImGui::Checkbox( "Gaussian Blur", &gbIsOn );
+            // if ( gbIsOn ) {
+            //     ImGui::SliderInt( "Gaussian Blur", &gbVal, 3, 55 );
+
+            //     prcedImage = Filtering::GaussianBlur( &prcedImage, &gbVal );
+            // }
+            // ImGui::Checkbox( "Median Blur", &mdbIsOn );
+            // if ( mdbIsOn ) {
+            //     ImGui::SliderInt( "Median Blur", &mdbVal, 3, 55 );
+
+            //     prcedImage = Filtering::MedianBlur( &prcedImage, &mdbVal );
+            // }
+            // ImGui::Checkbox( "Threshold", &thrIsOn );
+            // if ( thrIsOn ) {
+            //     ImGui::Columns( 2 );
+            //     ImGui::SliderInt( "Threshold Min", &thrMinVal, 0, 255 );
+            //     ImGui::NextColumn();
+            //     ImGui::SliderInt( "Threshold Max", &thrMaxVal, 0, 255 );
+            //     ImGui::NextColumn();
+
+            //     prcedImage = Filtering::Thresholding(
+            //         &prcedImage, &thrMinVal, &thrMaxVal, cv::THRESH_BINARY );
+            //     /* don't remove this, there will be others */
+            //     ImGui::Columns( 1 );
+            // }
+            // ImGui::Separator();
+            // ImGui::Columns( 2 );
+            // ImGui::SliderInt( "Canny Min", &cannyMinVal, 0, 255 );
+            // ImGui::NextColumn();
+            // ImGui::SliderInt( "Canny Max", &cannyMaxVal, 0, 255 );
+            // ImGui::Columns( 1 ); /* don't remove this, there will be others
+            // */
+
+            /* REMOVE THIS IF ALL WORKS - END */
+
+            // prcedImage = Filtering::Brightness( &prcingImage, &brVl );
+            // prcedImage1 = Filtering::Contrast( &prcingImage, &cntVl );
+            // prcedImage = Filtering::GaussianBlur( &prcedImage1, &gbVal );
+            // prcedImage1 = Filtering::MedianBlur( &prcedImage, &mdbVal );
+            // prcedImage = Filtering::Thresholding(
+            //     &prcedImage1, &thrMinVal, &thrMaxVal, cv::THRESH_BINARY );
+
+            /* The window for the text CV texture */
+            /* MOVED FROM THE TOP - BEGIN */
             ImGui::Text( "2D-Convolution Kernel" );
             ImGui::SliderFloat( "Brightness", &brVl, 0, 3 );
-            prcedImage = Filtering::Brightness( &prcingImage, &brVl );
+            testCVTex.Brightness( &brVl );
             ImGui::Text( "Built-in functions" );
             ImGui::SliderFloat( "Contrast", &cntVl, 0.001, 5 );
-            prcedImage = Filtering::Contrast( &prcedImage, &cntVl );
+            testCVTex.Contrast( &cntVl );
             ImGui::Checkbox( "Gaussian Blur", &gbIsOn );
             if ( gbIsOn ) {
                 ImGui::SliderInt( "Gaussian Blur", &gbVal, 3, 55 );
 
-                prcedImage = Filtering::GaussianBlur( &prcedImage, &gbVal );
+                testCVTex.GaussianBlur( &gbVal );
             }
             ImGui::Checkbox( "Median Blur", &mdbIsOn );
             if ( mdbIsOn ) {
                 ImGui::SliderInt( "Median Blur", &mdbVal, 3, 55 );
 
-                prcedImage = Filtering::MedianBlur( &prcedImage, &mdbVal );
+                testCVTex.MedianBlur( &mdbVal );
             }
             ImGui::Checkbox( "Threshold", &thrIsOn );
             if ( thrIsOn ) {
@@ -252,8 +324,8 @@ int main( void ) {
                 ImGui::SliderInt( "Threshold Max", &thrMaxVal, 0, 255 );
                 ImGui::NextColumn();
 
-                prcedImage = Filtering::Thresholding(
-                    &prcedImage, &thrMinVal, &thrMaxVal, cv::THRESH_BINARY );
+                testCVTex.Threshold( &thrMinVal, &thrMaxVal,
+                                        cv::THRESH_BINARY );
                 /* don't remove this, there will be others */
                 ImGui::Columns( 1 );
             }
@@ -263,21 +335,26 @@ int main( void ) {
             ImGui::NextColumn();
             ImGui::SliderInt( "Canny Max", &cannyMaxVal, 0, 255 );
             ImGui::Columns( 1 ); /* don't remove this, there will be others */
-
-            // prcedImage = Filtering::Brightness( &prcingImage, &brVl );
-            // prcedImage1 = Filtering::Contrast( &prcingImage, &cntVl );
-            // prcedImage = Filtering::GaussianBlur( &prcedImage1, &gbVal );
-            // prcedImage1 = Filtering::MedianBlur( &prcedImage, &mdbVal );
-            // prcedImage = Filtering::Thresholding(
-            //     &prcedImage1, &thrMinVal, &thrMaxVal, cv::THRESH_BINARY );
-
+            /* MOVED FROM THE TOP - END */
+            if ( ImGui::Button( "CV Texture test" ) ) {
+                cvTestWin_IsOpen = !cvTestWin_IsOpen;
+            }
+            if ( cvTestWin_IsOpen ) {
+                if ( !ImGui::Begin( "CV Texture test", &cvTestWin_IsOpen ) ) {
+                    ImGui::End();
+                } else {
+                    testCVTex.OnImGuiRender();
+                    ImGui::End();
+                    GLCall( glBindTexture( GL_TEXTURE_2D, 0 ) );
+                }
+            }
             /* THE WINDOW FOR THE SOURCE IMAGE */
             if ( ImGui::Button( "Open Source Image" ) ) {
                 srcImWin_IsShowing = !srcImWin_IsShowing;
             }
             if ( srcImWin_IsShowing ) {
                 if ( !ImGui::Begin( "Source Image", &srcImWin_IsShowing ) ) {
-                    // ImGui::End();
+                    ImGui::End();
                 } else {
                     // GLCall( glGenTextures( 1, &texture ) );
                     GLCall( glBindTexture( GL_TEXTURE_2D, srcImTexture ) );
@@ -309,7 +386,7 @@ int main( void ) {
             if ( prcedImWin_IsShowing ) {
                 if ( !ImGui::Begin( "Processing Image",
                                     &prcedImWin_IsShowing ) ) {
-                    // ImGui::End();
+                    ImGui::End();
                 } else {
                     // GLCall( glGenTextures( 1, &texture ) );
                     GLCall( glBindTexture( GL_TEXTURE_2D, prcImTexture ) );
@@ -335,6 +412,46 @@ int main( void ) {
 
                     // if ( prcedImage.ptr() ) free( prcedImage.ptr() );
                 }
+            }
+            ImGui::Separator();
+            ImGui::Columns( 2 );
+            ImGui::InputText( "Firsth image path", frstImPath,
+                              sizeof( buf ) - 1 );
+            ImGui::InputText( "Second image path", scndImPath,
+                              sizeof( buf ) - 1 );
+            ImGui::Button( "+" );
+            ImGui::Button( "+" );
+            ImGui::Button( "+" );
+            ImGui::NextColumn();
+            // ImGui::Image();
+            ImGui::Text( "There will be an image" );
+
+            /* HSV menu is shown/off (open with Color->HSV) */
+            if ( hsvMenu_IsShowing ) {
+                ImGui::Begin( "HSV editable", &hsvMenu_IsShowing );
+                ImGui::ColorEdit3( "color", colors, ImGuiColorEditFlags_HSV );
+                /* This &colors[0] gives RED channel instead of proper H */
+                ImGui::SliderFloat( "H value of HSV", &colors[0], 0, 1 );
+
+                GLCall( glBindTexture( GL_TEXTURE_2D, hsvImTexture ) );
+                GLCall( glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                                         GL_LINEAR ) );
+                GLCall( glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+                                         GL_LINEAR ) );
+                GLCall( glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 ) );
+                /* Don't use RGBA format, idk why but it doesn't do
+                 * anything with it */
+                GLCall( glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, hsvImage.cols,
+                                      hsvImage.rows, 0, GL_RGB,
+                                      /* pointer to the processing image */
+                                      GL_UNSIGNED_BYTE, prcedImage.ptr() ) );
+                ImGui::Image(
+                    reinterpret_cast<void*>(
+                        static_cast<intptr_t>( hsvImTexture ) ),
+                    ImVec2( hsvImage.cols * .5f, hsvImage.rows * .5f ),
+                    ImVec2( 0.f, 0.f ), ImVec2( 1.f, 1.f ) );
+                ImGui::End();
+                GLCall( glBindTexture( GL_TEXTURE_2D, 0 ) );
             }
 
             ImGui::End();
