@@ -16,8 +16,8 @@ class Filtering {
     static cv::Mat EdgeDetPrep( cv::Mat prcingImg );
 
    public:
-    static cv::Mat Brightness( cv::Mat *prcingImage, float *ctrlVal );
-    static cv::Mat Contrast( cv::Mat *prcingImage, float *ctrlVal );
+    static cv::Mat IdentityMul( cv::Mat *prcingImage, float *ctrlVal ); /* Convolutional Identity */
+    static cv::Mat ContrastBrightness( cv::Mat *prcingImage, float *conVal, float *briVal );
     static cv::Mat GaussianBlur( cv::Mat *prcingImage, int *ctrlVal );
     static cv::Mat MedianBlur( cv::Mat *prcingImage, int *ctrlVal );
     static cv::Mat Thresholding(

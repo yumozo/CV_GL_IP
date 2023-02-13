@@ -23,8 +23,7 @@ class TextureCV {
     /* Render / Show the windows with the image */
     void OnImGuiRender();
     /* Filters */
-    void Brightness( float *val );
-    void Contrast( float *val );
+    void ContrastBrightness( float *conVal, float *briVal );
     void GaussianBlur( int *val );
     void MedianBlur( int *val );
     void Threshold( int *minval, int *maxval,

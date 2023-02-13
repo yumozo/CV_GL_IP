@@ -1,6 +1,6 @@
 #include "filtering.h"
 
-cv::Mat Filtering::Brightness( cv::Mat *prcingImage, float *ctrlVal ) {
+cv::Mat Filtering::IdentityMul( cv::Mat *prcingImage, float *ctrlVal ) {
     cv::Mat prcedImage;
 
     /* Identity kernel */
@@ -12,11 +12,11 @@ cv::Mat Filtering::Brightness( cv::Mat *prcingImage, float *ctrlVal ) {
     return prcedImage;
 }
 
-cv::Mat Filtering::Contrast( cv::Mat *prcingImage, float *ctrlVal){
+cv::Mat Filtering::ContrastBrightness( cv::Mat *prcingImage, float *conVal, float *briVal){
     cv::Mat prcedImg;
 
     // prcedImg = *prcingImage * ( *ctrlVal / 127 + 1 ) - *ctrlVal;
-    (*prcingImage).convertTo( prcedImg, -1, *ctrlVal, 0 );
+    (*prcingImage).convertTo( prcedImg, -1, *conVal, *briVal );
 
     return prcedImg;
 }

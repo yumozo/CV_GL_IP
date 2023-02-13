@@ -66,12 +66,8 @@ void TextureCV::UpdateTex(cv::Mat img){
     GLCall( glBindTexture( GL_TEXTURE_2D, 0 ) );
 }
 
-void TextureCV::Brightness( float *val ) {
-    cv::Mat m_EditImage = Filtering::Brightness( &m_Image, val );
-    UpdateTex(m_EditImage);
-}
-void TextureCV::Contrast( float *val ) {
-    cv::Mat m_EditImage = Filtering::Contrast( &m_Image, val );
+void TextureCV::ContrastBrightness( float *conVal, float *briVal ) {
+    cv::Mat m_EditImage = Filtering::ContrastBrightness( &m_Image, conVal, briVal );
     UpdateTex(m_EditImage);
 }
 void TextureCV::GaussianBlur( int *val ) {

@@ -14,4 +14,6 @@
 class CustomFiltering {
    public:
     static cv::Mat Sepia( cv::Mat *prcingImg );
+    static cv::Mat Watercolor( cv::Mat *prcingImg );
+    static cv::Mat Cartoon( cv::Mat *prcingImg );
 };
