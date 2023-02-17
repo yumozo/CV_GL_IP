@@ -117,16 +117,80 @@ int main( void ) {
         static float s = .2f;
         static float v = .2f;
         static float colors[3] = { h, s, v };
-        /* Show/off hsv editable image */
+        /* Show/off edit menues */
+        static bool gbMenu_IsShowing = false;
+        static bool bcMenu_IsShowing = false;
+        static bool mbMenu_IsShown = false;
         static bool hsvMenu_IsShowing = false;
+        static bool cedMenu_IsShown = false;
+        static bool sedMenu_IsShowing = false;
+        static bool ckMenu_IsShown = false;
         /* Show/off src, processed images */
-        static bool cvTestWin_IsOpen = false;
-        static bool srcImWin_IsShowing = false;
+        static bool cvTestWin_IsShown = false;
+        static bool srcImWin_IsShown = false;
         static bool prcedImWin_IsShowing = false;
-        /* Arithmetics */
+        /* Preset Kernels */
+        const char* kernels[] = { "blur",     "bottom sobel", "custom",
+                                  "emboss",   "identity",     "left sobel",
+                                  "outline",  "right sobel",  "sharpen",
+                                  "top sobel" };
+        static const char* current_kernel = NULL;
+
         static char frstImPath[255] = "res/textures/tiger.jpg";
         static char scndImPath[255] = "res/textures/wc.jpg";
+
         char buf[255]{};
+        struct convKernel {
+            float Row1[3]{ 0., 0., 0. };
+            float Row2[3]{ 0., 0., 0. };
+            float Row3[3]{ 0., 0., 0. };
+        };
+        struct IdKernel {
+            float Row1[3]{ 0., 0., 0. };
+            float Row2[3]{ 0., 1., 0. };
+            float Row3[3]{ 0., 0., 0. };
+        };
+        struct blurKernel {
+            float Row1[3]{ .25 / 4, .25 / 2, .25 / 4 };
+            float Row2[3]{ .25 / 2, .25, .25 / 2 };
+            float Row3[3]{ .25 / 4, .25 / 2, .25 / 4 };
+        };
+        struct bSobelKernel {
+            float Row1[3]{ -1., -2., -1. };
+            float Row2[3]{ 0., 0., 0. };
+            float Row3[3]{ 1., 2., 1. };
+        };
+        struct tSobelKernel {
+            float Row3[3]{ 1., 2., 1. };
+            float Row2[3]{ 0., 0., 0. };
+            float Row1[3]{ -1., -2., -1. };
+        };
+        struct rSobelKernel {
+            float Row3[3]{ -1., 0., 1. };
+            float Row2[3]{ -2., 0., 2. };
+            float Row1[3]{ -1., 0., 1. };
+        };
+        struct lSobelKernel {
+            float Row3[3]{ 1., 0., -1. };
+            float Row2[3]{ 2., 0., -2. };
+            float Row1[3]{ 1., 0., -1. };
+        };
+        struct embossKernel {
+            float Row3[3]{ -2., -1., 0. };
+            float Row2[3]{ -1., 1., 1. };
+            float Row1[3]{ 0., 1., 2. };
+        };
+        struct outlineKernel {
+            float Row3[3]{ -1., -1., -1. };
+            float Row2[3]{ -1., 8., -1. };
+            float Row1[3]{ -1., -1., -1. };
+        };
+        struct sharpenKernel {
+            float Row3[3]{ 0., -1., 0. };
+            float Row2[3]{ -1., 5., -1. };
+            float Row1[3]{ 0., -1., 0. };
+        };
+        convKernel ck;
         /* Loop until the user closes the window */
         while ( !glfwWindowShouldClose( window ) ) {
             GLCall( glClearColor( 0.f, 0.f, 0.f, 1.f ) );
@@ -151,6 +215,16 @@ int main( void ) {
             /* Options */
             if ( ImGui::BeginMainMenuBar() ) {
                 if ( ImGui::BeginMenu( "File" ) ) {
+                    if ( ImGui::MenuItem( "Open", "CTRL+O" ) ) {
+                    }
+                    if ( ImGui::MenuItem( "Save", "CTRL+S" ) ) {
+                    }
+                    ImGui::Separator();
+                    if ( ImGui::MenuItem( "Save As...", "SHIFT+CTRL+S" ) ) {
+                    }
+                    if ( ImGui::MenuItem( "Exit", "CTRL+Q" ) ) {
+                        printf( "The program could be terminated.\n" );
+                    }
                     ImGui::EndMenu();
                 }
                 if ( ImGui::BeginMenu( "Edit" ) ) {
@@ -167,6 +241,13 @@ int main( void ) {
                     }
                     ImGui::EndMenu();
                 }
+                /* IMAGE ADJUSTMENTS */
+                if ( ImGui::BeginMenu( "Adj" ) ) {
+                    if ( ImGui::MenuItem( "Brightness/Contrast" ) ) {
+                        bcMenu_IsShowing = !bcMenu_IsShowing;
+                    }
+                    ImGui::EndMenu();
+                }
                 /* FILTERS */
                 if ( ImGui::BeginMenu( "Filter" ) ) {
                     if ( ImGui::MenuItem( "B&W" ) ) {
@@ -179,25 +260,11 @@ int main( void ) {
                         cv::imshow( "B&W", resized_down );
                     }
                     ImGui::Separator();
-                    if ( ImGui::MenuItem( "Sobel edge detection map" ) ) {
-                        cv::Mat resized_down;
-                        /* Should be controlled parameters */
-                        double s = .6;
-                        cv::resize( srcImage, resized_down, cv::Size(), s, s,
-                                    cv::INTER_LINEAR );
-                        /* x & y should be controlled parameters */
-                        int x = 1;
-                        int y = 1;
-                        Filtering::SobelEdgeDet( resized_down, x, y );
+                    if ( ImGui::MenuItem( "Gaussian Blur" ) ) {
+                        gbMenu_IsShowing = !gbMenu_IsShowing;
                     }
-                    if ( ImGui::MenuItem( "Canny edge detection map" ) ) {
-                        cv::Mat resized_down;
-                        double s = .6;
-                        cv::resize( srcImage, resized_down, cv::Size(), s, s,
-                                    cv::INTER_LINEAR );
-                        /* min & max vals should be controlled parameters */
-                        Filtering::CannyEdgeDet( resized_down, cannyMinVal,
-                                                 cannyMaxVal );
+                    if ( ImGui::MenuItem( "Median Blur" ) ) {
+                        mbMenu_IsShown = !mbMenu_IsShown;
                     }
                     ImGui::Separator();
                     if ( ImGui::MenuItem( "Sepia filter" ) ) {
@@ -220,6 +287,10 @@ int main( void ) {
                         cv::resize( srcImage, resized_down, cv::Size(), s, s,
                                     cv::INTER_LINEAR );
                         CustomFiltering::Cartoon( &resized_down );
+                    }
+                    ImGui::Separator();
+                    if ( ImGui::MenuItem( "Custom Kernel" ) ) {
+                        ckMenu_IsShown = !ckMenu_IsShown;
                     }
                     ImGui::EndMenu();
                 }
@@ -293,6 +364,24 @@ int main( void ) {
                         }
                     }
                     ImGui::Separator();
+                    if ( ImGui::BeginMenu( "Edge Detection" ) ) {
+                        if ( ImGui::MenuItem( "Canny" ) ) {
+                            cedMenu_IsShown = !cedMenu_IsShown;
+                        }
+                        if ( ImGui::MenuItem( "Sobel" ) ) {
+                            cv::Mat resized_down;
+                            /* Should be controlled parameters */
+                            double s = .6;
+                            cv::resize( srcImage, resized_down, cv::Size(), s,
+                                        s, cv::INTER_LINEAR );
+                            /* x & y should be controlled parameters */
+                            int x = 1;
+                            int y = 1;
+                            Filtering::SobelEdgeDet( resized_down, x, y );
+                        }
+                        ImGui::EndMenu();
+                    }
+                    ImGui::Separator();
                     if ( ImGui::MenuItem( "Open HSV edit" ) ) {
                         hsvMenu_IsShowing = !hsvMenu_IsShowing;
                     }
@@ -302,8 +391,7 @@ int main( void ) {
             }
 
             ImGui::Text( "Images to do with" );
-            ImGui::InputText( "Image path", frstImPath,
-                              sizeof( buf ) - 1 );
+            ImGui::InputText( "Image path", frstImPath, sizeof( buf ) - 1 );
             ImGui::InputText( "Path to second image", scndImPath,
                               sizeof( buf ) - 1 );
             if ( ImGui::Button( "Load image" ) ) {
@@ -319,28 +407,12 @@ int main( void ) {
                 }
             }
             /* The window for the text CV texture */
-            ImGui::Text( "Built-in functions" );
-            ImGui::SliderFloat( "Brightness", &brVl, -255, 255 );
-            ImGui::SliderFloat( "Contrast", &cntVl, 0.001, 5 );
-            testCVTex.ContrastBrightness( &cntVl, &brVl );
-            ImGui::Checkbox( "Gaussian Blur", &gbIsOn );
-            if ( gbIsOn ) {
-                ImGui::SliderInt( "Gaussian Blur", &gbVal, 3, 55 );
-
-                testCVTex.GaussianBlur( &gbVal );
-            }
-            ImGui::Checkbox( "Median Blur", &mdbIsOn );
-            if ( mdbIsOn ) {
-                ImGui::SliderInt( "Median Blur", &mdbVal, 3, 55 );
-
-                testCVTex.MedianBlur( &mdbVal );
-            }
             ImGui::Checkbox( "Threshold", &thrIsOn );
             if ( thrIsOn ) {
                 ImGui::Columns( 2 );
-                ImGui::SliderInt( "Threshold Min", &thrMinVal, 0, 255 );
+                ImGui::SliderInt( "Threshold min value", &thrMinVal, 0, 255 );
                 ImGui::NextColumn();
-                ImGui::SliderInt( "Threshold Max", &thrMaxVal, 0, 255 );
+                ImGui::SliderInt( "Threshold max value", &thrMaxVal, 0, 255 );
                 ImGui::NextColumn();
 
                 testCVTex.Threshold( &thrMinVal, &thrMaxVal,
@@ -348,20 +420,14 @@ int main( void ) {
                 /* don't remove this, there will be others */
                 ImGui::Columns( 1 );
             }
-            ImGui::Separator();
-            ImGui::Text( "Edge detection" );
-            ImGui::Columns( 2 );
-            ImGui::SliderInt( "Canny Min", &cannyMinVal, 0, 255 );
-            ImGui::NextColumn();
-            ImGui::SliderInt( "Canny Max", &cannyMaxVal, 0, 255 );
-            ImGui::Columns( 1 ); /* don't remove this, there will be others */
 
+            ImGui::Separator();
             /* THE WINDOW FOR THE SOURCE IMAGE */
-            if ( ImGui::Button( "Open Source Image" ) ) {
-                srcImWin_IsShowing = !srcImWin_IsShowing;
+            if ( ImGui::Button( "Show Source Image" ) ) {
+                srcImWin_IsShown = !srcImWin_IsShown;
             }
-            if ( srcImWin_IsShowing ) {
-                if ( !ImGui::Begin( "Source Image", &srcImWin_IsShowing ) ) {
+            if ( srcImWin_IsShown ) {
+                if ( !ImGui::Begin( "Source Image", &srcImWin_IsShown ) ) {
                     ImGui::End();
                 } else {
                     // GLCall( glGenTextures( 1, &texture ) );
@@ -387,16 +453,125 @@ int main( void ) {
                     // if ( srcImage.ptr() ) free( srcImage.ptr() );
                 }
             }
-            if ( ImGui::Button( "Open Processed Image" ) ) {
-                cvTestWin_IsOpen = !cvTestWin_IsOpen;
+            if ( ImGui::Button( "Show Processed Image" ) ) {
+                cvTestWin_IsShown = !cvTestWin_IsShown;
             }
-            if ( cvTestWin_IsOpen ) {
-                if ( !ImGui::Begin( "CV Texture test", &cvTestWin_IsOpen ) ) {
+            if ( cvTestWin_IsShown ) {
+                if ( !ImGui::Begin( "CV Texture test", &cvTestWin_IsShown ) ) {
                     ImGui::End();
                 } else {
                     testCVTex.OnImGuiRender();
                     ImGui::End();
                     GLCall( glBindTexture( GL_TEXTURE_2D, 0 ) );
+                }
+            }
+            /* Brightness/Contrast */
+            if ( bcMenu_IsShowing ) {
+                if ( !ImGui::Begin( "Brightness/Contrast",
+                                    &bcMenu_IsShowing ) ) {
+                    ImGui::End();
+                } else {
+                    ImGui::SliderFloat( "Brightness", &brVl, -255, 255 );
+                    ImGui::SliderFloat( "Contrast", &cntVl, 0.001, 5 );
+                    testCVTex.ContrastBrightness( &cntVl, &brVl );
+                    if ( ImGui::Button( "Reset" ) ) {
+                        brVl = 0;
+                        cntVl = 1;
+                    }
+                    ImGui::End();
+                }
+            }
+            /*  Gaussian blur menu is shown/off
+                (open with Filter->Gaussian Blur) */
+            if ( gbMenu_IsShowing ) {
+                if ( !ImGui::Begin( "Gaussian Blur", &gbMenu_IsShowing ) ) {
+                    ImGui::End();
+                } else {
+                    ImGui::Checkbox( "Gaussian blur", &gbIsOn );
+                    if ( gbIsOn ) {
+                        ImGui::SliderInt( "Gaussian blur", &gbVal, 3, 55 );
+                        testCVTex.GaussianBlur( &gbVal );
+                    }
+                    ImGui::End();
+                }
+            }
+            /*  Median blur menu */
+            if ( mbMenu_IsShown ) {
+                if ( !ImGui::Begin( "Gaussian Blur", &mbMenu_IsShown ) ) {
+                    ImGui::End();
+                } else {
+                    ImGui::Checkbox( "Median blur", &mdbIsOn );
+                    if ( mdbIsOn ) {
+                        ImGui::SliderInt( "Median blur", &mdbVal, 3, 55 );
+                        testCVTex.MedianBlur( &mdbVal );
+                    }
+                    ImGui::End();
+                }
+            }
+            /* Canny Edge Detection menu */
+            if ( cedMenu_IsShown ) {
+                if ( !ImGui::Begin( "Canny ED", &cedMenu_IsShown ) ) {
+                    ImGui::End();
+                } else {
+                    ImGui::Columns( 2 );
+                    ImGui::SliderInt( "Canny Min", &cannyMinVal, 0, 255 );
+                    ImGui::NextColumn();
+                    ImGui::SliderInt( "Canny Max", &cannyMaxVal, 0, 255 );
+                    ImGui::Columns( 1 );
+                    if ( ImGui::Button( "Apply" ) ) {
+                        cv::Mat resized_down;
+                        double s = .6;
+                        cv::resize( srcImage, resized_down, cv::Size(), s, s,
+                                    cv::INTER_LINEAR );
+                        /* min & max vals should be controlled parameters */
+                        Filtering::CannyEdgeDet( resized_down, cannyMinVal,
+                                                 cannyMaxVal );
+                    }
+                    ImGui::End();
+                }
+            }
+            /* Custom Conv Kernel menu */
+            if ( ckMenu_IsShown ) {
+                if ( !ImGui::Begin( "Apply Custom Convoluton Kernel",
+                                    &ckMenu_IsShown ) ) {
+                    ImGui::End();
+                } else {
+                    if ( ImGui::BeginCombo( "Kernel", current_kernel ) ) {
+                        for ( int n = 0; n < IM_ARRAYSIZE( kernels ); n++ ) {
+                            bool is_selected = ( current_kernel == kernels[n] );
+                            if ( ImGui::Selectable( kernels[n],
+                                                    is_selected ) ) {
+                                current_kernel = kernels[n];
+                            }
+                            if ( is_selected ) {
+                                ImGui::SetItemDefaultFocus();
+                            }
+                        }
+                        ImGui::EndCombo();
+                    }
+                    ImGui::Text( "Convoluton kernel matrix" );
+                    ImGui::InputFloat3( "row1", ck.Row1, 2 );
+                    ImGui::InputFloat3( "row2", ck.Row2, 2 );
+                    ImGui::InputFloat3( "row3", ck.Row3, 2 );
+                    if ( ImGui::Button( "Apply" ) ) {
+                        cv::Mat result;
+                        /* Custom kernel settings */
+                        cv::Mat kernel = ( cv::Mat_<double>( 3, 3 ) <<  //
+                                               ck.Row1[0],              //
+                                           ck.Row1[1],                  //
+                                           ck.Row1[2],                  //
+                                           ck.Row2[0],                  //
+                                           ck.Row2[1],                  //
+                                           ck.Row2[2],                  //
+                                           ck.Row3[0],                  //
+                                           ck.Row3[1],                  //
+                                           ck.Row3[2] );
+                        /* Apply this one instantly */
+                        cv::filter2D( srcImage, result, -1, kernel,
+                                      cv::Point( -1, -1 ), 4 );
+                        cv::imshow( "Result", result );
+                    }
+                    ImGui::End();
                 }
             }
             /* HSV menu is shown/off (open with Color->HSV) */

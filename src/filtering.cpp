@@ -6,7 +6,7 @@ cv::Mat Filtering::IdentityMul( cv::Mat *prcingImage, float *ctrlVal ) {
     /* Identity kernel */
     cv::Mat idKernel =
         ( cv::Mat_<double>( 3, 3 ) << 0, 0, 0, 0, *ctrlVal, 0, 0, 0, 0 );
-    /* Apply this one instatnly */
+    /* Apply this one instantly */
     cv::filter2D( *prcingImage, prcedImage, -1, idKernel, cv::Point( -1, -1 ),
                   4 );
     return prcedImage;
