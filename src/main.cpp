@@ -79,7 +79,8 @@ int main( void ) {
         // testMenu->RegisterTest<test:Testcvimage>
 
         /* Test texture for the CV image window */
-        TextureCV testCVTex( "res/textures/tiger.jpg" );
+        TextureCV inCVTex( "res/textures/tiger.jpg" );
+        TextureCV outCVTex( "res/textures/tiger.jpg" );
 
         /* IMAGE PROCESSING */
         GLuint srcImTexture;
@@ -122,14 +123,17 @@ int main( void ) {
             int s = 0;
             int v = 0;
         } hsv_values;
+        /* Show/off image menues */
+        static bool resizeMenu_IsShown = false;
         /* Show/off edit menues */
-        static bool gbMenu_IsShowing = false;
-        static bool bcMenu_IsShowing = false;
+        static bool gbMenu_IsShown = false;
+        static bool bcMenu_IsShown = false;
         static bool mbMenu_IsShown = false;
-        static bool hsvMenu_IsShowing = false;
+        static bool hsvMenu_IsShown = false;
         static bool cedMenu_IsShown = false;
-        static bool sedMenu_IsShowing = false;
+        static bool sedMenu_IsShown = false;
         static bool ckMenu_IsShown = false;
+        static bool thrMenu_IsShown = false;
         /* Show/off src, processed images */
         static bool cvTestWin_IsShown = false;
         static bool srcImWin_IsShown = false;
@@ -221,11 +225,14 @@ int main( void ) {
             if ( ImGui::BeginMainMenuBar() ) {
                 if ( ImGui::BeginMenu( "File" ) ) {
                     if ( ImGui::MenuItem( "Open", "CTRL+O" ) ) {
+                        /**/
                     }
                     if ( ImGui::MenuItem( "Save", "CTRL+S" ) ) {
+                        /**/
                     }
                     ImGui::Separator();
                     if ( ImGui::MenuItem( "Save As...", "SHIFT+CTRL+S" ) ) {
+                        /**/
                     }
                     if ( ImGui::MenuItem( "Exit", "CTRL+Q" ) ) {
                         printf( "The program could be terminated.\n" );
@@ -234,22 +241,34 @@ int main( void ) {
                 }
                 if ( ImGui::BeginMenu( "Edit" ) ) {
                     if ( ImGui::MenuItem( "Undo", "CTRL+Z" ) ) {
+                        /**/
                     }
                     if ( ImGui::MenuItem( "Redo", "CTRL+Y" ) ) {
+                        /**/
                     }
                     ImGui::Separator();
                     if ( ImGui::MenuItem( "Cut", "CTRL+X" ) ) {
+                        /**/
                     }
                     if ( ImGui::MenuItem( "Copy", "CTRL+C" ) ) {
+                        /**/
                     }
                     if ( ImGui::MenuItem( "Paste", "CTRL+V" ) ) {
+                        /**/
+                    }
+                    ImGui::EndMenu();
+                }
+                /* Operations with the image */
+                if ( ImGui::BeginMenu( "Image" ) ) {
+                    if ( ImGui::MenuItem( "Resize..." ) ) {
+                        resizeMenu_IsShown = !resizeMenu_IsShown;
                     }
                     ImGui::EndMenu();
                 }
                 /* IMAGE ADJUSTMENTS */
                 if ( ImGui::BeginMenu( "Adj" ) ) {
                     if ( ImGui::MenuItem( "Brightness/Contrast" ) ) {
-                        bcMenu_IsShowing = !bcMenu_IsShowing;
+                        bcMenu_IsShown = !bcMenu_IsShown;
                     }
                     ImGui::EndMenu();
                 }
@@ -264,36 +283,39 @@ int main( void ) {
                                     cv::INTER_LINEAR );
                         cv::imshow( "B&W", resized_down );
                     }
-                    ImGui::Separator();
-                    if ( ImGui::MenuItem( "Gaussian Blur" ) ) {
-                        gbMenu_IsShowing = !gbMenu_IsShowing;
+                    if ( ImGui::BeginMenu( "Blur" ) ) {
+                        if ( ImGui::MenuItem( "Gaussian Blur" ) ) {
+                            gbMenu_IsShown = !gbMenu_IsShown;
+                        }
+                        if ( ImGui::MenuItem( "Median Blur" ) ) {
+                            mbMenu_IsShown = !mbMenu_IsShown;
+                        }
+                        ImGui::EndMenu();
                     }
-                    if ( ImGui::MenuItem( "Median Blur" ) ) {
-                        mbMenu_IsShown = !mbMenu_IsShown;
+                    if ( ImGui::BeginMenu( "Custom Filters" ) ) {
+                        if ( ImGui::MenuItem( "Sepia filter" ) ) {
+                            cv::Mat resized_down;
+                            double s = .5;
+                            cv::resize( srcImage, resized_down, cv::Size(), s,
+                                        s, cv::INTER_LINEAR );
+                            CustomFiltering::Sepia( &resized_down );
+                        }
+                        if ( ImGui::MenuItem( "Watercolor filter" ) ) {
+                            cv::Mat resized_down;
+                            double s = .5;
+                            cv::resize( srcImage, resized_down, cv::Size(), s,
+                                        s, cv::INTER_LINEAR );
+                            CustomFiltering::Watercolor( &resized_down );
+                        }
+                        if ( ImGui::MenuItem( "Cartoon filter" ) ) {
+                            cv::Mat resized_down;
+                            double s = .5;
+                            cv::resize( srcImage, resized_down, cv::Size(), s,
+                                        s, cv::INTER_LINEAR );
+                            CustomFiltering::Cartoon( &resized_down );
+                        }
+                        ImGui::EndMenu();
                     }
-                    ImGui::Separator();
-                    if ( ImGui::MenuItem( "Sepia filter" ) ) {
-                        cv::Mat resized_down;
-                        double s = .5;
-                        cv::resize( srcImage, resized_down, cv::Size(), s, s,
-                                    cv::INTER_LINEAR );
-                        CustomFiltering::Sepia( &resized_down );
-                    }
-                    if ( ImGui::MenuItem( "Watercolor filter" ) ) {
-                        cv::Mat resized_down;
-                        double s = .5;
-                        cv::resize( srcImage, resized_down, cv::Size(), s, s,
-                                    cv::INTER_LINEAR );
-                        CustomFiltering::Watercolor( &resized_down );
-                    }
-                    if ( ImGui::MenuItem( "Cartoon filter" ) ) {
-                        cv::Mat resized_down;
-                        double s = .5;
-                        cv::resize( srcImage, resized_down, cv::Size(), s, s,
-                                    cv::INTER_LINEAR );
-                        CustomFiltering::Cartoon( &resized_down );
-                    }
-                    ImGui::Separator();
                     if ( ImGui::MenuItem( "Custom Kernel" ) ) {
                         ckMenu_IsShown = !ckMenu_IsShown;
                     }
@@ -301,74 +323,78 @@ int main( void ) {
                 }
                 /* COLORS */
                 if ( ImGui::BeginMenu( "Color" ) ) {
-                    if ( ImGui::MenuItem( "Get R values" ) ) {
-                        std::vector<cv::Mat> chans( 3 );
-                        cv::split( srcImage, chans );
-                        cv::Mat resized_down;
-                        cv::resize( chans[2], resized_down, cv::Size(), .5, .5,
-                                    cv::INTER_LINEAR );
-                        cv::imshow( "Green ch only", resized_down );
-                    }
-                    if ( ImGui::MenuItem( "Get G values" ) ) {
-                        std::vector<cv::Mat> chans( 3 );
-                        cv::split( srcImage, chans );
-                        cv::Mat resized_down;
-                        cv::resize( chans[1], resized_down, cv::Size(), .5, .5,
-                                    cv::INTER_LINEAR );
-                        cv::imshow( "Green ch only", resized_down );
-                    }
-                    if ( ImGui::MenuItem( "Get B values" ) ) {
-                        std::vector<cv::Mat> chans( 3 );
-                        cv::split( srcImage, chans );
-                        cv::Mat resized_down;
-                        cv::resize( chans[0], resized_down, cv::Size(), .5, .5,
-                                    cv::INTER_LINEAR );
-                        cv::imshow( "Green ch only", resized_down );
-                    }
-                    ImGui::Separator();
-                    if ( ImGui::MenuItem( "Bitwise and" ) ) {
-                        cv::Mat im1 = cv::imread( frstImPath );
-                        cv::Mat im2 = cv::imread( scndImPath );
-                        cv::Mat im2_resized;
-                        cv::resize( im2, im2_resized,
-                                    cv::Size( im1.cols, im1.rows ) );
-                        if ( im1.empty() && im2.empty() ) {
-                            printf( "Something wrong with your pics." );
-                        } else {
-                            cv::Mat result;
-                            cv::bitwise_and( im1, im2_resized, result );
-                            cv::imshow( "Addition func", result );
+                    if ( ImGui::BeginMenu( "Get color values" ) ) {
+                        if ( ImGui::MenuItem( "Get Red" ) ) {
+                            std::vector<cv::Mat> chans( 3 );
+                            cv::split( srcImage, chans );
+                            cv::Mat resized_down;
+                            cv::resize( chans[2], resized_down, cv::Size(), .5,
+                                        .5, cv::INTER_LINEAR );
+                            cv::imshow( "Green ch only", resized_down );
                         }
-                    }
-                    if ( ImGui::MenuItem( "Bitwise or" ) ) {
-                        cv::Mat im1 = cv::imread( frstImPath );
-                        cv::Mat im2 = cv::imread( scndImPath );
-                        cv::Mat im2_resized;
-                        cv::resize( im2, im2_resized,
-                                    cv::Size( im1.cols, im1.rows ) );
-                        if ( im1.empty() && im2.empty() ) {
-                            printf( "Something wrong with your pics." );
-                        } else {
-                            cv::Mat result;
-                            cv::bitwise_or( im1, im2_resized, result );
-                            cv::imshow( "Addition func", result );
+                        if ( ImGui::MenuItem( "Get Green" ) ) {
+                            std::vector<cv::Mat> chans( 3 );
+                            cv::split( srcImage, chans );
+                            cv::Mat resized_down;
+                            cv::resize( chans[1], resized_down, cv::Size(), .5,
+                                        .5, cv::INTER_LINEAR );
+                            cv::imshow( "Green ch only", resized_down );
                         }
-                    }
-                    if ( ImGui::MenuItem( "Bitwise not" ) ) {
-                        cv::Mat im1 = cv::imread( frstImPath );
-                        cv::Mat im2 = cv::imread( scndImPath );
-                        cv::Mat im2_resized;
-                        cv::resize( im2, im2_resized,
-                                    cv::Size( im1.cols, im1.rows ) );
-                        if ( im1.empty() && im2.empty() ) {
-                            printf( "Something wrong with your pics." );
-                        } else {
-                            cv::Mat result;
-                            cv::bitwise_not( im1, result, result );
-                            cv::imshow( "Addition func", result );
+                        if ( ImGui::MenuItem( "Get Blue" ) ) {
+                            std::vector<cv::Mat> chans( 3 );
+                            cv::split( srcImage, chans );
+                            cv::Mat resized_down;
+                            cv::resize( chans[0], resized_down, cv::Size(), .5,
+                                        .5, cv::INTER_LINEAR );
+                            cv::imshow( "Green ch only", resized_down );
                         }
+                        ImGui::EndMenu();
                     }
-                    ImGui::Separator();
+                    if ( ImGui::BeginMenu( "Bitwise operations" ) ) {
+                        if ( ImGui::MenuItem( "Bitwise and" ) ) {
+                            cv::Mat im1 = cv::imread( frstImPath );
+                            cv::Mat im2 = cv::imread( scndImPath );
+                            cv::Mat im2_resized;
+                            cv::resize( im2, im2_resized,
+                                        cv::Size( im1.cols, im1.rows ) );
+                            if ( im1.empty() && im2.empty() ) {
+                                printf( "Something wrong with your pics." );
+                            } else {
+                                cv::Mat result;
+                                cv::bitwise_and( im1, im2_resized, result );
+                                cv::imshow( "Addition func", result );
+                            }
+                        }
+                        if ( ImGui::MenuItem( "Bitwise or" ) ) {
+                            cv::Mat im1 = cv::imread( frstImPath );
+                            cv::Mat im2 = cv::imread( scndImPath );
+                            cv::Mat im2_resized;
+                            cv::resize( im2, im2_resized,
+                                        cv::Size( im1.cols, im1.rows ) );
+                            if ( im1.empty() && im2.empty() ) {
+                                printf( "Something wrong with your pics." );
+                            } else {
+                                cv::Mat result;
+                                cv::bitwise_or( im1, im2_resized, result );
+                                cv::imshow( "Addition func", result );
+                            }
+                        }
+                        if ( ImGui::MenuItem( "Bitwise not" ) ) {
+                            cv::Mat im1 = cv::imread( frstImPath );
+                            cv::Mat im2 = cv::imread( scndImPath );
+                            cv::Mat im2_resized;
+                            cv::resize( im2, im2_resized,
+                                        cv::Size( im1.cols, im1.rows ) );
+                            if ( im1.empty() && im2.empty() ) {
+                                printf( "Something wrong with your pics." );
+                            } else {
+                                cv::Mat result;
+                                cv::bitwise_not( im1, result, result );
+                                cv::imshow( "Addition func", result );
+                            }
+                        }
+                        ImGui::EndMenu();
+                    }
                     if ( ImGui::BeginMenu( "Edge Detection" ) ) {
                         if ( ImGui::MenuItem( "Canny" ) ) {
                             cedMenu_IsShown = !cedMenu_IsShown;
@@ -386,9 +412,11 @@ int main( void ) {
                         }
                         ImGui::EndMenu();
                     }
-                    ImGui::Separator();
                     if ( ImGui::MenuItem( "Open HSV edit" ) ) {
-                        hsvMenu_IsShowing = !hsvMenu_IsShowing;
+                        hsvMenu_IsShown = !hsvMenu_IsShown;
+                    }
+                    if ( ImGui::MenuItem( "Threshold" ) ) {
+                        thrMenu_IsShown = !thrMenu_IsShown;
                     }
                     ImGui::EndMenu();
                 }
@@ -411,23 +439,10 @@ int main( void ) {
                     printf( "Something wrong with your pics." );
                 }
             }
-            /* The window for the text CV texture */
-            ImGui::Checkbox( "Threshold", &thrIsOn );
-            if ( thrIsOn ) {
-                ImGui::Columns( 2 );
-                ImGui::SliderInt( "Threshold min value", &thrMinVal, 0, 255 );
-                ImGui::NextColumn();
-                ImGui::SliderInt( "Threshold max value", &thrMaxVal, 0, 255 );
-                ImGui::NextColumn();
-
-                testCVTex.Threshold( &thrMinVal, &thrMaxVal,
-                                     cv::THRESH_BINARY );
-                /* don't remove this, there will be others */
-                ImGui::Columns( 1 );
-            }
 
             ImGui::Separator();
-            /* THE WINDOW FOR THE SOURCE IMAGE */
+            /* ADDITIONAL MENUES */
+            /* The window for the source image */
             if ( ImGui::Button( "Show Source Image" ) ) {
                 srcImWin_IsShown = !srcImWin_IsShown;
             }
@@ -435,29 +450,12 @@ int main( void ) {
                 if ( !ImGui::Begin( "Source Image", &srcImWin_IsShown ) ) {
                     ImGui::End();
                 } else {
-                    // GLCall( glGenTextures( 1, &texture ) );
-                    GLCall( glBindTexture( GL_TEXTURE_2D, srcImTexture ) );
-                    GLCall( glTexParameteri(
-                        GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR ) );
-                    GLCall( glTexParameteri(
-                        GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR ) );
-                    GLCall( glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 ) );
-                    /* Don't use RGBA format, idk why but it doesn't do
-                     * anything with it */
-                    GLCall( glTexImage2D(
-                        GL_TEXTURE_2D, 0, GL_RGB, srcImage.cols, srcImage.rows,
-                        0, GL_RGB, GL_UNSIGNED_BYTE, srcImage.ptr() ) );
-                    ImGui::Image(
-                        reinterpret_cast<void*>(
-                            static_cast<intptr_t>( srcImTexture ) ),
-                        ImVec2( srcImage.cols * .5f, srcImage.rows * .5f ),
-                        ImVec2( 0.f, 0.f ), ImVec2( 1.f, 1.f ) );
+                    inCVTex.OnImGuiRender();
                     ImGui::End();
                     GLCall( glBindTexture( GL_TEXTURE_2D, 0 ) );
-
-                    // if ( srcImage.ptr() ) free( srcImage.ptr() );
                 }
             }
+            /* The window for the processed image */
             if ( ImGui::Button( "Show Processed Image" ) ) {
                 cvTestWin_IsShown = !cvTestWin_IsShown;
             }
@@ -465,20 +463,96 @@ int main( void ) {
                 if ( !ImGui::Begin( "CV Texture test", &cvTestWin_IsShown ) ) {
                     ImGui::End();
                 } else {
-                    testCVTex.OnImGuiRender();
+                    outCVTex.OnImGuiRender();
                     ImGui::End();
                     GLCall( glBindTexture( GL_TEXTURE_2D, 0 ) );
                 }
             }
+
+            /* MainMenu -> Image -> */
+            /* The Resize image menu */
+            if ( resizeMenu_IsShown ) {
+                if ( !ImGui::Begin( "Resize", &resizeMenu_IsShown ) ) {
+                    ImGui::End();
+                } else {
+                    /* Parameters*/
+                    static int width = 320;
+                    static int height = 200;
+                    static bool byPrc = false;
+                    static int sizeByPrc = 100;
+                    static bool byAbs = true;
+                    static bool aspRat = false;
+
+                    ImGui::Text( "Resampling: " );
+                    ImGui::SameLine( 200 );
+                    ImGui::Text( "*here will be a combobox*" );
+                    // ImGui::combo();
+
+                    if ( ImGui::Checkbox( "By percentage: ", &byPrc ) ) {
+                    }
+                    if ( byPrc ) {
+                        byAbs = false;
+                        ImGui::SameLine( 200 );
+                        ImGui::InputInt( "%", &sizeByPrc );
+                    }
+                    if ( ImGui::Checkbox( "By absolute size: ", &byAbs ) ) {
+                    }
+                    if ( byAbs ) {
+                        byPrc = false;
+                        ImGui::Text( "    " );
+                        ImGui::SameLine();
+                        if ( ImGui::Checkbox( "Maintain aspect ratio",
+                                              &aspRat ) ) {
+                        }
+                        ImGui::Separator();
+                        ImGui::Text( "Pixel size" );
+                        ImGui::Text( "Width: " );
+                        ImGui::SameLine( 100 );
+                        ImGui::InputInt( "wpixels", &width );
+                        ImGui::Text( "Height: " );
+                        ImGui::SameLine( 100 );
+                        ImGui::InputInt( "hpixels", &height );
+                    }
+                    ImGui::Separator();
+                    if ( ImGui::Button( "OK" ) ) {
+                        /* Apply */
+                    }
+                    ImGui::SameLine();
+                    if ( ImGui::Button( "Cancel" ) ) {
+                        /* set menuIsShown to false */
+                    }
+
+                    ImGui::End();
+                }
+            }
+            /* Threshold edit menu */
+            if ( thrMenu_IsShown ) {
+                if ( !ImGui::Begin( "Threshold", &thrMenu_IsShown ) ) {
+                    ImGui::End();
+                } else {
+                    ImGui::Checkbox( "Threshold", &thrIsOn );
+                    if ( thrIsOn ) {
+                        ImGui::SliderInt( "Threshold min value", &thrMinVal, 0,
+                                          255 );
+                        ImGui::NextColumn();
+                        ImGui::SliderInt( "Threshold max value", &thrMaxVal, 0,
+                                          255 );
+                        ImGui::NextColumn();
+
+                        outCVTex.Threshold( &thrMinVal, &thrMaxVal,
+                                            cv::THRESH_BINARY );
+                    }
+                    ImGui::End();
+                }
+            }
             /* Brightness/Contrast */
-            if ( bcMenu_IsShowing ) {
-                if ( !ImGui::Begin( "Brightness/Contrast",
-                                    &bcMenu_IsShowing ) ) {
+            if ( bcMenu_IsShown ) {
+                if ( !ImGui::Begin( "Brightness/Contrast", &bcMenu_IsShown ) ) {
                     ImGui::End();
                 } else {
                     ImGui::SliderFloat( "Brightness", &brVl, -255, 255 );
                     ImGui::SliderFloat( "Contrast", &cntVl, 0.001, 5 );
-                    testCVTex.ContrastBrightness( &cntVl, &brVl );
+                    outCVTex.ContrastBrightness( &cntVl, &brVl );
                     if ( ImGui::Button( "Reset" ) ) {
                         brVl = 0;
                         cntVl = 1;
@@ -488,14 +562,14 @@ int main( void ) {
             }
             /*  Gaussian blur menu is shown/off
                 (open with Filter->Gaussian Blur) */
-            if ( gbMenu_IsShowing ) {
-                if ( !ImGui::Begin( "Gaussian Blur", &gbMenu_IsShowing ) ) {
+            if ( gbMenu_IsShown ) {
+                if ( !ImGui::Begin( "Gaussian Blur", &gbMenu_IsShown ) ) {
                     ImGui::End();
                 } else {
                     ImGui::Checkbox( "Gaussian blur", &gbIsOn );
                     if ( gbIsOn ) {
                         ImGui::SliderInt( "Gaussian blur", &gbVal, 3, 55 );
-                        testCVTex.GaussianBlur( &gbVal );
+                        outCVTex.GaussianBlur( &gbVal );
                     }
                     ImGui::End();
                 }
@@ -508,7 +582,7 @@ int main( void ) {
                     ImGui::Checkbox( "Median blur", &mdbIsOn );
                     if ( mdbIsOn ) {
                         ImGui::SliderInt( "Median blur", &mdbVal, 3, 55 );
-                        testCVTex.MedianBlur( &mdbVal );
+                        outCVTex.MedianBlur( &mdbVal );
                     }
                     ImGui::End();
                 }
@@ -535,7 +609,7 @@ int main( void ) {
                     ImGui::End();
                 }
             }
-            /* Custom Conv Kernel menu */
+            /* Custom Conv Kernel menu NOT IMPLEMENTED YET*/
             if ( ckMenu_IsShown ) {
                 if ( !ImGui::Begin( "Apply Custom Convoluton Kernel",
                                     &ckMenu_IsShown ) ) {
@@ -580,8 +654,8 @@ int main( void ) {
                 }
             }
             /* HSV menu is shown/off (open with Color->HSV) */
-            if ( hsvMenu_IsShowing ) {
-                ImGui::Begin( "HSV editable", &hsvMenu_IsShowing );
+            if ( hsvMenu_IsShown ) {
+                ImGui::Begin( "HSV editable", &hsvMenu_IsShown );
                 /* This &colors[0] gives RED channel instead of proper H */
 
                 cv::Mat hsvim;
@@ -606,7 +680,7 @@ int main( void ) {
                 cv::merge( hsv_chans_edit, hsvim_edit );
 
                 cv::Mat out;
-                cv::cvtColor(hsvim_edit, out, cv::COLOR_HSV2BGR);
+                cv::cvtColor( hsvim_edit, out, cv::COLOR_HSV2BGR );
 
                 GLCall( glBindTexture( GL_TEXTURE_2D, hsvImTexture ) );
                 GLCall( glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
