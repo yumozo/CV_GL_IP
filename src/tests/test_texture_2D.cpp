@@ -55,6 +55,7 @@ void TestTexture2D::OnRender() {
 
     m_Texture->Bind();
 
+    /* First texture */
     {
         glm::mat4 model = glm::translate(glm::mat4(1.f), m_TranslationA);
         glm::mat4 mvp = m_Proj * m_View * model;
@@ -62,6 +63,7 @@ void TestTexture2D::OnRender() {
         m_Shader->SetUniformMat4f("u_MVP", mvp);
         renderer.Draw(*m_VAO, *m_IndexBuffer, *m_Shader);
     }
+    /* Second texture */
     {
         glm::mat4 model = glm::translate(glm::mat4(1.f), m_TranslationB);
         glm::mat4 mvp = m_Proj * m_View * model;

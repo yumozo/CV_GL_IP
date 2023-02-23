@@ -24,3 +24,13 @@ constructor(file_path)
 - ImGui::Begin(*name of window*, *is show*)
 - *file_path*
 private
+
+---
+
+Vertex Array <- Vertex Buffer + Vertex Buffer Layout
+
+Index Buffer
+
+Shader
+
+Texture

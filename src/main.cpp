@@ -113,10 +113,15 @@ int main( void ) {
         static bool mdbIsOn = false;
         static bool thrIsOn = false;
         /* HSV convert and edit */
-        static float h = .2f;
-        static float s = .2f;
-        static float v = .2f;
-        static float colors[3] = { h, s, v };
+        static int h = 0;
+        static int s = 0;
+        static int v = 0;
+        static int hsvVals[3] = { h, s, v };
+        struct hsvVal {
+            int h = 0;
+            int s = 0;
+            int v = 0;
+        } hsv_values;
         /* Show/off edit menues */
         static bool gbMenu_IsShowing = false;
         static bool bcMenu_IsShowing = false;
@@ -577,9 +582,31 @@ int main( void ) {
             /* HSV menu is shown/off (open with Color->HSV) */
             if ( hsvMenu_IsShowing ) {
                 ImGui::Begin( "HSV editable", &hsvMenu_IsShowing );
-                ImGui::ColorEdit3( "color", colors, ImGuiColorEditFlags_HSV );
                 /* This &colors[0] gives RED channel instead of proper H */
-                ImGui::SliderFloat( "H value of HSV", &colors[0], 0, 1 );
+
+                cv::Mat hsvim;
+                cv::cvtColor( srcImage, hsvim, cv::COLOR_BGR2HSV );
+                cv::Mat hsvim_edit = hsvim.clone();
+
+                /* HSV channels splitted out to process each one */
+                std::vector<cv::Mat> hsv_chans( 3 );
+                std::vector<cv::Mat> hsv_chans_edit( 3 );
+                /* slpit */
+                cv::split( hsvim, hsv_chans );
+                /* editing HSV channels */
+                cv::split( hsvim_edit, hsv_chans_edit );
+
+                ImGui::SliderInt( "H", &hsv_values.h, 0, 180 );
+                cv::add( hsv_chans[0], hsv_values.h, hsv_chans_edit[0] );
+                ImGui::SliderInt( "S", &hsv_values.s, -255, 255 );
+                cv::add( hsv_chans[1], hsv_values.s, hsv_chans_edit[1] );
+                ImGui::SliderInt( "V", &hsv_values.v, -255, 255 );
+                cv::add( hsv_chans[2], hsv_values.v, hsv_chans_edit[2] );
+
+                cv::merge( hsv_chans_edit, hsvim_edit );
+
+                cv::Mat out;
+                cv::cvtColor(hsvim_edit, out, cv::COLOR_HSV2BGR);
 
                 GLCall( glBindTexture( GL_TEXTURE_2D, hsvImTexture ) );
                 GLCall( glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
@@ -587,12 +614,12 @@ int main( void ) {
                 GLCall( glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
                                          GL_LINEAR ) );
                 GLCall( glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 ) );
-                /* Don't use RGBA format, idk why but it doesn't do
-                 * anything with it */
+                /* Don't use GL_RGBA format, idk why but it doesn't do
+                   anything within it */
                 GLCall( glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, hsvImage.cols,
                                       hsvImage.rows, 0, GL_RGB,
                                       /* pointer to the processing image */
-                                      GL_UNSIGNED_BYTE, prcedImage.ptr() ) );
+                                      GL_UNSIGNED_BYTE, out.ptr() ) );
                 ImGui::Image(
                     reinterpret_cast<void*>(
                         static_cast<intptr_t>( hsvImTexture ) ),
