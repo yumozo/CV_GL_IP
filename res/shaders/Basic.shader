@@ -33,7 +33,7 @@ void main()
 
   vec4 texColor = texture(u_Texture, v_TexCoord);
   // texColor = texColor * u_Time;
-  color = vec4(texColor.r - sin(u_Time/3),
+  color = vec4(texColor.r - sin(u_Time/2)/2,
                texColor.g,
                texColor.b,
                texColor.a);
