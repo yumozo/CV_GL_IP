@@ -12,8 +12,6 @@ class TextureCV {
     cv::Mat m_Image;
     cv::Mat m_EditImage;
 
-    void UpdateTex( cv::Mat img );
-
    public:
     TextureCV( const std::string &path );
     ~TextureCV();
@@ -22,6 +20,8 @@ class TextureCV {
     void Unbind() const;
     /* Render / Show the windows with the image */
     void OnImGuiRender();
+    /* Set new image */
+    void UpdateTex( cv::Mat img );
     /* Filters */
     void ContrastBrightness( float *conVal, float *briVal );
     void GaussianBlur( int *val );

@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"name": "OpenCV_Tuto_with_GL",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.ejs": "html",
+			"*.tcc": "cpp",
+			"istream": "cpp",
+			"iostream": "cpp",
+			"string": "cpp",
+			"cmath": "cpp"
+		}
+	}
+}

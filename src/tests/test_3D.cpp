@@ -1,18 +1,20 @@
-#include "test_texture_2D.h"
-
-#include "../renderer.h"
-// #include <imgui/imgui.h>
-#include "../../include/imgui/imgui.h"
+#include "test_3D.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <GLFW/glfw3.h>
+
+#include "../renderer.h"
+
+#include "../../include/imgui/imgui.h"
 
 namespace test {
-TestTexture2D::TestTexture2D()
-    : m_Proj( glm::ortho( 0.f, 960.f, 0.f, 540.f, -1.f, 1.f ) ),
-      m_View( glm::translate( glm::mat4( 1.f ), glm::vec3( 0, 0, 0 ) ) ),
-      m_TranslationA( 200, 200, 0 ),
-      m_TranslationB( 400, 200, 0 ) {
+Test3D::Test3D()
+    : m_Proj( glm::perspective( glm::radians( 60.0f ), 960.f / 540.f, .1f,
+                                1000.f ) ),
+      m_View( glm::translate( glm::mat4( 1.f ), glm::vec3( 0, 0, -3 ) ) ),
+      m_Translation( 0, 0, 0 ),
+      m_Rotation( .5f, 1.f, 0.f ) {
     float positions[] = {
         -50.f, -50.f, 0.f, 0.f,  // 0
         50.f,  -50.f, 1.f, 0.f,  // 1
@@ -25,6 +27,7 @@ TestTexture2D::TestTexture2D()
         2, 3, 0   //
     };
 
+    // GLCall( glEnable( GL_DEPTH_TEST ) );
     GLCall( glEnable( GL_BLEND ) );
     GLCall( glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA ) );
 
@@ -46,36 +49,33 @@ TestTexture2D::TestTexture2D()
     m_Texture = std::make_unique<Texture>( "res/textures/somepic.png" );
     m_Shader->SetUniform1i( "u_Texture", 0 );
 }
-TestTexture2D::~TestTexture2D() {}
-void TestTexture2D::OnUpdate( float deltaTime ) {}
-void TestTexture2D::OnRender() {
-    GLCall( glClearColor( 0.f, 0.f, 0.f, 1.f ) );
+Test3D::~Test3D() {}
+void Test3D::OnUpdate( float deltaTime ) {}
+void Test3D::OnRender() {
+    GLCall( glClearColor( 0.f, .1f, .2f, 1.f ) );
     GLCall( glClear( GL_COLOR_BUFFER_BIT ) );
     Renderer renderer;
 
     m_Texture->Bind();
 
-    /* First texture */
     {
-        glm::mat4 model = glm::translate( glm::mat4( 1.f ), m_TranslationA );
-        glm::mat4 mvp = m_Proj * m_View * model;
-        m_Shader->Bind();
-        m_Shader->SetUniformMat4f( "u_MVP", mvp );
-        renderer.Draw( *m_VAO, *m_IndexBuffer, *m_Shader );
-    }
-    /* Second texture */
-    {
-        glm::mat4 model = glm::translate( glm::mat4( 1.f ), m_TranslationB );
+        glm::mat4 model = glm::translate( glm::mat4( 1.f ), m_Translation );
+        model = glm::rotate(
+            model, (float)glfwGetTime() * glm::radians( 50.f ),
+            glm::vec3( m_Rotation.x, m_Rotation.y, m_Rotation.z ) );
+        // Was it learnopengl
+        // glm::mat4 model = glm::rotate( glm::mat4( 1.f ), glm::radians( -55.f
+        // ),
+        //                                glm::vec3( 1.f, 0.f, 0.f ) );
         glm::mat4 mvp = m_Proj * m_View * model;
         m_Shader->Bind();
         m_Shader->SetUniformMat4f( "u_MVP", mvp );
         renderer.Draw( *m_VAO, *m_IndexBuffer, *m_Shader );
     }
 }
-void TestTexture2D::OnImGuiRender() {
-    ImGui::SliderFloat3( "Translation A", &m_TranslationA.x, 0.f, 960.f );
-    ImGui::SliderFloat3( "Translation B", &m_TranslationB.x, 0.f, 960.f );
-    ImGui::Text( "Application average %.3f ms/frame (%.1f FPS)",
-                 1000.f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate );
+void Test3D::OnImGuiRender() {
+    ImGui::SliderFloat3( "3D test", &m_Translation.x, -100.f, 100.f );
+    ImGui::SliderFloat3( "Rotation vector", &m_Rotation.x, -180, 180 );
 }
+
 }  // namespace test

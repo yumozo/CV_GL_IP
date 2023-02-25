@@ -64,7 +64,6 @@ add_executable(main
   ${SRC_DIR}/texture.cpp
   ${SRC_DIR}/vertex_array.cpp
   ${SRC_DIR}/vertex_buffer.cpp
-  ${SRC_DIR}/cv_image.cpp
   ${SRC_DIR}/filtering.cpp
   ${SRC_DIR}/custom_filtering.cpp
   ${SRC_DIR}/texture_cv.cpp
@@ -78,6 +77,7 @@ add_executable(main
   ${SRC_DIR}/tests/test.cpp
   ${SRC_DIR}/tests/test_clear_color.cpp
   ${SRC_DIR}/tests/test_texture_2D.cpp
+  ${SRC_DIR}/tests/test_3D.cpp
 )
 
 # target_link_libraries(main ${OpenCV_LIBS} imgui glm)

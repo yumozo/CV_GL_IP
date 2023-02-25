@@ -23,13 +23,13 @@
 #include "vertex_array.h"
 #include "shader.h"
 #include "texture.h"
-#include "cv_image.h"
 #include "filtering.h"
 #include "custom_filtering.h"
 #include "texture_cv.h"
 
 #include "tests/test_clear_color.h"
 #include "tests/test_texture_2D.h"
+#include "tests/test_3D.h"
 
 /* Remove this if the VC Image class has implemeted */
 #include "../include/stb_image/stb_image.h"
@@ -76,11 +76,12 @@ int main( void ) {
 
         testMenu->RegisterTest<test::TestClearColor>( "Clear Color" );
         testMenu->RegisterTest<test::TestTexture2D>( "2D Texture" );
-        // testMenu->RegisterTest<test:Testcvimage>
+        testMenu->RegisterTest<test::Test3D>( "Test 3D" );
 
         /* Test texture for the CV image window */
         TextureCV inCVTex( "res/textures/tiger.jpg" );
         TextureCV outCVTex( "res/textures/tiger.jpg" );
+        TextureCV hsvCVTex( "res/textures/tiger.jpg" );
 
         /* IMAGE PROCESSING */
         GLuint srcImTexture;
@@ -90,16 +91,15 @@ int main( void ) {
         GLCall( glGenTextures( 1, &prcImTexture ) );
         GLCall( glGenTextures( 1, &hsvImTexture ) );
         /* The sourse image -- original one container */
-        cv::Mat srcImage = cv::imread( "res/textures/tiger.jpg" );
-        /* The second container for the processed image */
-        cv::Mat prcingImage = srcImage.clone();
-        cv::Mat prcedImage = srcImage.clone();
-        cv::Mat prcedImage1;
-        cv::Mat hsvImage = srcImage.clone();
+        struct Images {
+            cv::Mat src = cv::imread( "res/textures/tiger.jpg" );
+            cv::Mat processing = src.clone();
+            cv::Mat processed = src.clone();
+            cv::Mat hsv = src.clone();
+        } images;
 
         /* Filters parameters */
         static float brVl = 0;
-        static float brVl1 = 1;
         static float cntVl = 1;
         static int gbVal = 3;
         static int mdbVal = 3;
@@ -108,24 +108,18 @@ int main( void ) {
         static int cannyMinVal = 100;
         static int cannyMaxVal = 200;
         /* Filters on/off */
-        static bool brightnessIsOn = false;
-        static bool contrastIsOn = false;
-        static bool gbIsOn = false;
-        static bool mdbIsOn = false;
-        static bool thrIsOn = false;
-        /* HSV convert and edit */
-        static int h = 0;
-        static int s = 0;
-        static int v = 0;
-        static int hsvVals[3] = { h, s, v };
+        static bool brightChange_IsOn = false;
+        static bool contrastChange_IsOn = false;
+        static bool gb_IsOn = false;
+        static bool mdb_IsOn = false;
+        static bool thr_IsOn = false;
         struct hsvVal {
             int h = 0;
             int s = 0;
             int v = 0;
         } hsv_values;
-        /* Show/off image menues */
+        /* EDIT GUI MENUES */
         static bool resizeMenu_IsShown = false;
-        /* Show/off edit menues */
         static bool gbMenu_IsShown = false;
         static bool bcMenu_IsShown = false;
         static bool mbMenu_IsShown = false;
@@ -147,8 +141,8 @@ int main( void ) {
 
         static char frstImPath[255] = "res/textures/tiger.jpg";
         static char scndImPath[255] = "res/textures/wc.jpg";
-
         char buf[255]{};
+
         struct convKernel {
             float Row1[3]{ 0., 0., 0. };
             float Row2[3]{ 0., 0., 0. };
@@ -276,7 +270,7 @@ int main( void ) {
                 if ( ImGui::BeginMenu( "Filter" ) ) {
                     if ( ImGui::MenuItem( "B&W" ) ) {
                         cv::Mat img_gray;
-                        cv::cvtColor( srcImage, img_gray, cv::COLOR_BGR2GRAY );
+                        cv::cvtColor( images.src, img_gray, cv::COLOR_BGR2GRAY );
                         cv::Mat resized_down;
                         double s = .5;
                         cv::resize( img_gray, resized_down, cv::Size(), s, s,
@@ -296,21 +290,21 @@ int main( void ) {
                         if ( ImGui::MenuItem( "Sepia filter" ) ) {
                             cv::Mat resized_down;
                             double s = .5;
-                            cv::resize( srcImage, resized_down, cv::Size(), s,
+                            cv::resize( images.src, resized_down, cv::Size(), s,
                                         s, cv::INTER_LINEAR );
                             CustomFiltering::Sepia( &resized_down );
                         }
                         if ( ImGui::MenuItem( "Watercolor filter" ) ) {
                             cv::Mat resized_down;
                             double s = .5;
-                            cv::resize( srcImage, resized_down, cv::Size(), s,
+                            cv::resize( images.src, resized_down, cv::Size(), s,
                                         s, cv::INTER_LINEAR );
                             CustomFiltering::Watercolor( &resized_down );
                         }
                         if ( ImGui::MenuItem( "Cartoon filter" ) ) {
                             cv::Mat resized_down;
                             double s = .5;
-                            cv::resize( srcImage, resized_down, cv::Size(), s,
+                            cv::resize( images.src, resized_down, cv::Size(), s,
                                         s, cv::INTER_LINEAR );
                             CustomFiltering::Cartoon( &resized_down );
                         }
@@ -326,7 +320,7 @@ int main( void ) {
                     if ( ImGui::BeginMenu( "Get color values" ) ) {
                         if ( ImGui::MenuItem( "Get Red" ) ) {
                             std::vector<cv::Mat> chans( 3 );
-                            cv::split( srcImage, chans );
+                            cv::split( images.src, chans );
                             cv::Mat resized_down;
                             cv::resize( chans[2], resized_down, cv::Size(), .5,
                                         .5, cv::INTER_LINEAR );
@@ -334,7 +328,7 @@ int main( void ) {
                         }
                         if ( ImGui::MenuItem( "Get Green" ) ) {
                             std::vector<cv::Mat> chans( 3 );
-                            cv::split( srcImage, chans );
+                            cv::split( images.src, chans );
                             cv::Mat resized_down;
                             cv::resize( chans[1], resized_down, cv::Size(), .5,
                                         .5, cv::INTER_LINEAR );
@@ -342,7 +336,7 @@ int main( void ) {
                         }
                         if ( ImGui::MenuItem( "Get Blue" ) ) {
                             std::vector<cv::Mat> chans( 3 );
-                            cv::split( srcImage, chans );
+                            cv::split( images.src, chans );
                             cv::Mat resized_down;
                             cv::resize( chans[0], resized_down, cv::Size(), .5,
                                         .5, cv::INTER_LINEAR );
@@ -403,7 +397,7 @@ int main( void ) {
                             cv::Mat resized_down;
                             /* Should be controlled parameters */
                             double s = .6;
-                            cv::resize( srcImage, resized_down, cv::Size(), s,
+                            cv::resize( images.src, resized_down, cv::Size(), s,
                                         s, cv::INTER_LINEAR );
                             /* x & y should be controlled parameters */
                             int x = 1;
@@ -427,13 +421,14 @@ int main( void ) {
             ImGui::InputText( "Image path", frstImPath, sizeof( buf ) - 1 );
             ImGui::InputText( "Path to second image", scndImPath,
                               sizeof( buf ) - 1 );
-            if ( ImGui::Button( "Load image" ) ) {
+            /* Doesn't work */
+            if ( ImGui::Button( "Load images" ) ) {
                 /* Load new image */
                 cv::Mat srcImage = cv::imread( frstImPath );
                 /* Update variables */
-                prcingImage = srcImage.clone();
-                prcedImage = srcImage.clone();
-                hsvImage = srcImage.clone();
+                images.processing = srcImage.clone();
+                images.processed = srcImage.clone();
+                images.hsv = srcImage.clone();
 
                 if ( srcImage.empty() ) {
                     printf( "Something wrong with your pics." );
@@ -452,9 +447,10 @@ int main( void ) {
                 } else {
                     inCVTex.OnImGuiRender();
                     ImGui::End();
-                    GLCall( glBindTexture( GL_TEXTURE_2D, 0 ) );
+                    // GLCall( glBindTexture( GL_TEXTURE_2D, 0 ) );
                 }
             }
+            ImGui::SameLine();
             /* The window for the processed image */
             if ( ImGui::Button( "Show Processed Image" ) ) {
                 cvTestWin_IsShown = !cvTestWin_IsShown;
@@ -465,7 +461,7 @@ int main( void ) {
                 } else {
                     outCVTex.OnImGuiRender();
                     ImGui::End();
-                    GLCall( glBindTexture( GL_TEXTURE_2D, 0 ) );
+                    // GLCall( glBindTexture( GL_TEXTURE_2D, 0 ) );
                 }
             }
 
@@ -488,15 +484,13 @@ int main( void ) {
                     ImGui::Text( "*here will be a combobox*" );
                     // ImGui::combo();
 
-                    if ( ImGui::Checkbox( "By percentage: ", &byPrc ) ) {
-                    }
+                    ImGui::Checkbox( "By percentage: ", &byPrc );
                     if ( byPrc ) {
                         byAbs = false;
                         ImGui::SameLine( 200 );
                         ImGui::InputInt( "%", &sizeByPrc );
                     }
-                    if ( ImGui::Checkbox( "By absolute size: ", &byAbs ) ) {
-                    }
+                    ImGui::Checkbox( "By absolute size: ", &byAbs );
                     if ( byAbs ) {
                         byPrc = false;
                         ImGui::Text( "    " );
@@ -506,22 +500,35 @@ int main( void ) {
                         }
                         ImGui::Separator();
                         ImGui::Text( "Pixel size" );
+                        /* Setting width */
                         ImGui::Text( "Width: " );
                         ImGui::SameLine( 100 );
-                        ImGui::InputInt( "wpixels", &width );
+                        ImGui::InputInt( "wpixels", &width, 10 );
+                        /* Setting height */
                         ImGui::Text( "Height: " );
                         ImGui::SameLine( 100 );
-                        ImGui::InputInt( "hpixels", &height );
+                        ImGui::InputInt( "hpixels", &height, 10 );
                     }
                     ImGui::Separator();
-                    if ( ImGui::Button( "OK" ) ) {
-                        /* Apply */
+                    if ( ImGui::Button( "OK" ) ) { /* TextureCV func needed */
+                        cv::Mat img_resized;
+                        if ( byPrc ) { /* By percentage */
+                            cv::resize( images.src, img_resized, cv::Size(),
+                                        sizeByPrc / 100., sizeByPrc / 100. );
+                        }
+                        if ( byAbs ) { /* By absolute size */
+                            cv::resize( images.src, img_resized,
+                                        cv::Size( width, height ) );
+                        }
+                        // outCVTex.SetWidth(img_resized.cols);
+                        // outCVTex.SetHeight(img_resized.rows);
+                        outCVTex.UpdateTex( img_resized );
+                        resizeMenu_IsShown = false;
                     }
                     ImGui::SameLine();
                     if ( ImGui::Button( "Cancel" ) ) {
-                        /* set menuIsShown to false */
+                        resizeMenu_IsShown = false;
                     }
-
                     ImGui::End();
                 }
             }
@@ -530,8 +537,8 @@ int main( void ) {
                 if ( !ImGui::Begin( "Threshold", &thrMenu_IsShown ) ) {
                     ImGui::End();
                 } else {
-                    ImGui::Checkbox( "Threshold", &thrIsOn );
-                    if ( thrIsOn ) {
+                    ImGui::Checkbox( "Threshold", &thr_IsOn );
+                    if ( thr_IsOn ) {
                         ImGui::SliderInt( "Threshold min value", &thrMinVal, 0,
                                           255 );
                         ImGui::NextColumn();
@@ -566,8 +573,8 @@ int main( void ) {
                 if ( !ImGui::Begin( "Gaussian Blur", &gbMenu_IsShown ) ) {
                     ImGui::End();
                 } else {
-                    ImGui::Checkbox( "Gaussian blur", &gbIsOn );
-                    if ( gbIsOn ) {
+                    ImGui::Checkbox( "Gaussian blur", &gb_IsOn );
+                    if ( gb_IsOn ) {
                         ImGui::SliderInt( "Gaussian blur", &gbVal, 3, 55 );
                         outCVTex.GaussianBlur( &gbVal );
                     }
@@ -579,8 +586,8 @@ int main( void ) {
                 if ( !ImGui::Begin( "Gaussian Blur", &mbMenu_IsShown ) ) {
                     ImGui::End();
                 } else {
-                    ImGui::Checkbox( "Median blur", &mdbIsOn );
-                    if ( mdbIsOn ) {
+                    ImGui::Checkbox( "Median blur", &mdb_IsOn );
+                    if ( mdb_IsOn ) {
                         ImGui::SliderInt( "Median blur", &mdbVal, 3, 55 );
                         outCVTex.MedianBlur( &mdbVal );
                     }
@@ -600,7 +607,7 @@ int main( void ) {
                     if ( ImGui::Button( "Apply" ) ) {
                         cv::Mat resized_down;
                         double s = .6;
-                        cv::resize( srcImage, resized_down, cv::Size(), s, s,
+                        cv::resize( images.src, resized_down, cv::Size(), s, s,
                                     cv::INTER_LINEAR );
                         /* min & max vals should be controlled parameters */
                         Filtering::CannyEdgeDet( resized_down, cannyMinVal,
@@ -646,7 +653,7 @@ int main( void ) {
                                            ck.Row3[1],                  //
                                            ck.Row3[2] );
                         /* Apply this one instantly */
-                        cv::filter2D( srcImage, result, -1, kernel,
+                        cv::filter2D( images.src, result, -1, kernel,
                                       cv::Point( -1, -1 ), 4 );
                         cv::imshow( "Result", result );
                     }
@@ -659,7 +666,7 @@ int main( void ) {
                 /* This &colors[0] gives RED channel instead of proper H */
 
                 cv::Mat hsvim;
-                cv::cvtColor( srcImage, hsvim, cv::COLOR_BGR2HSV );
+                cv::cvtColor( images.src, hsvim, cv::COLOR_BGR2HSV );
                 cv::Mat hsvim_edit = hsvim.clone();
 
                 /* HSV channels splitted out to process each one */
@@ -682,23 +689,8 @@ int main( void ) {
                 cv::Mat out;
                 cv::cvtColor( hsvim_edit, out, cv::COLOR_HSV2BGR );
 
-                GLCall( glBindTexture( GL_TEXTURE_2D, hsvImTexture ) );
-                GLCall( glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
-                                         GL_LINEAR ) );
-                GLCall( glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
-                                         GL_LINEAR ) );
-                GLCall( glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 ) );
-                /* Don't use GL_RGBA format, idk why but it doesn't do
-                   anything within it */
-                GLCall( glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, hsvImage.cols,
-                                      hsvImage.rows, 0, GL_RGB,
-                                      /* pointer to the processing image */
-                                      GL_UNSIGNED_BYTE, out.ptr() ) );
-                ImGui::Image(
-                    reinterpret_cast<void*>(
-                        static_cast<intptr_t>( hsvImTexture ) ),
-                    ImVec2( hsvImage.cols * .5f, hsvImage.rows * .5f ),
-                    ImVec2( 0.f, 0.f ), ImVec2( 1.f, 1.f ) );
+                hsvCVTex.UpdateTex( out );
+                hsvCVTex.OnImGuiRender();
                 ImGui::End();
                 GLCall( glBindTexture( GL_TEXTURE_2D, 0 ) );
             }
