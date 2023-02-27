@@ -15,7 +15,7 @@ Test3D::Test3D()
       m_View( glm::translate( glm::mat4( 1.f ), glm::vec3( 0, 0, -3 ) ) ),
       m_Translation( 0, 0, 0 ),
       m_Rotation( .5f, 1.f, 0.f ) {
-    float positions[] = {
+    float cube_positions[] = {
         // front
         -.5f, -.5f, .5f, 0.f, 0.f,  // 0
         .5f, -.5f, .5f, 1.f, 0.f,   // 1
@@ -27,8 +27,7 @@ Test3D::Test3D()
         .5f, .5f, -.5f, 1.f, 1.f,    // 6
         -.5f, .5f, -.5f, 0.f, 1.f    // 7
     };
-
-    unsigned indices[] = {
+    unsigned cube_indices[] = {
         0, 1, 2,  // front
         2, 3, 0,  //
         1, 5, 6,  // right
@@ -50,13 +49,13 @@ Test3D::Test3D()
     m_VAO = std::make_unique<VertexArray>();
 
     m_VertexBuffer =
-        std::make_unique<VertexBuffer>( positions, 8 * 5 * sizeof( float ) );
+        std::make_unique<VertexBuffer>( cube_positions, 8 * 5 * sizeof( float ) );
     VertexBufferLayout layout;
     layout.Push<float>( 3 );
     layout.Push<float>( 2 );
     m_VAO->AddBuffer( *m_VertexBuffer, layout );
 
-    m_IndexBuffer = std::make_unique<IndexBuffer>( indices, 3 * 12 );
+    m_IndexBuffer = std::make_unique<IndexBuffer>( cube_indices, 3 * 12 );
 
     m_Shader = std::make_unique<Shader>( "res/shaders/Basic.shader" );
     m_Shader->Bind();
@@ -92,7 +91,7 @@ void Test3D::OnRender() {
 }
 void Test3D::OnImGuiRender() {
     ImGui::SliderFloat3( "3D test", &m_Translation.x, -10.f, 10.f );
-    ImGui::SliderFloat3( "Rotation vector", &m_Rotation.x, -180, 180 );
+    ImGui::SliderFloat3( "Rotation vector", &m_Rotation.x, -1, 1 );
 }
 
 }  // namespace test

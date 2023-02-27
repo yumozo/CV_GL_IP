@@ -1,6 +1,6 @@
 #include "edit_gui.h"
 #include "../../include/imgui/imgui.h"
-#include "../../include/imgui/imgui_impl_glfw_gl3.h"
+#include "../../include/imgui/imgui_impl_glfw.h"
 
 EditGUI::EditGUI() {}
 

@@ -8,7 +8,8 @@
 // #include <imgui/imgui.h>
 // #include <imgui/imgui_impl_glfw_gl3.h>
 #include "../include/imgui/imgui.h"
-#include "../include/imgui/imgui_impl_glfw_gl3.h"
+#include "../include/imgui/imgui_impl_glfw.h"
+#include "../include/imgui/imgui_impl_opengl3.h"
 
 #include <iostream>
 #include <fstream>
@@ -41,11 +42,12 @@ int main( void ) {
     if ( !glfwInit() ) return -1;
     GLFWwindow* window;
     /* GL version setting */
+    const char* glsl_version = "#version 130";
     glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 4 );
     glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 6 );
     glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow( 960, 540, "Hello World", NULL, NULL );
+    window = glfwCreateWindow( 1280, 720, "Hello World", NULL, NULL );
     if ( !window ) {
         glfwTerminate();
         return -1;
@@ -67,9 +69,30 @@ int main( void ) {
 
         /* Init ImGui, setup */
         ImGui::CreateContext();
-        ImGui_ImplGlfwGL3_Init( window, true );
+        ImGuiIO& io = ImGui::GetIO();
+        (void)io;
+        io.ConfigFlags |=
+            ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;  // Enable Docking
+        io.ConfigFlags |=
+            ImGuiConfigFlags_ViewportsEnable;  // Enable Multi-Viewport /
+                                               // Platform Windows
+        // Setup Dear ImGui style
         ImGui::StyleColorsDark();
 
+        // When viewports are enabled we tweak WindowRounding/WindowBg so
+        // platform windows can look identical to regular ones.
+        ImGuiStyle& style = ImGui::GetStyle();
+        if ( io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable ) {
+            style.WindowRounding = 0.0f;
+            style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+        }
+
+        // Setup Platform/Renderer backends
+        ImGui_ImplGlfw_InitForOpenGL( window, true );
+        ImGui_ImplOpenGL3_Init( glsl_version );
+
+        // Tests
         test::Test* currentTest = nullptr;
         test::TestMenu* testMenu = new test::TestMenu( currentTest );
         currentTest = testMenu;
@@ -200,7 +223,10 @@ int main( void ) {
             /* Render here */
             renderer.Clear();
 
-            ImGui_ImplGlfwGL3_NewFrame();
+            // Start the Dear ImGui frame
+            ImGui_ImplOpenGL3_NewFrame();
+            ImGui_ImplGlfw_NewFrame();
+            ImGui::NewFrame();
             if ( currentTest ) {
                 currentTest->OnUpdate( 0.0f );
                 currentTest->OnRender();
@@ -270,7 +296,8 @@ int main( void ) {
                 if ( ImGui::BeginMenu( "Filter" ) ) {
                     if ( ImGui::MenuItem( "B&W" ) ) {
                         cv::Mat img_gray;
-                        cv::cvtColor( images.src, img_gray, cv::COLOR_BGR2GRAY );
+                        cv::cvtColor( images.src, img_gray,
+                                      cv::COLOR_BGR2GRAY );
                         cv::Mat resized_down;
                         double s = .5;
                         cv::resize( img_gray, resized_down, cv::Size(), s, s,
@@ -636,9 +663,9 @@ int main( void ) {
                         ImGui::EndCombo();
                     }
                     ImGui::Text( "Convoluton kernel matrix" );
-                    ImGui::InputFloat3( "row1", ck.Row1, 2 );
-                    ImGui::InputFloat3( "row2", ck.Row2, 2 );
-                    ImGui::InputFloat3( "row3", ck.Row3, 2 );
+                    ImGui::InputFloat3( "row1", ck.Row1, ".2f" );
+                    ImGui::InputFloat3( "row2", ck.Row2, ".2f" );
+                    ImGui::InputFloat3( "row3", ck.Row3, ".2f" );
                     if ( ImGui::Button( "Apply" ) ) {
                         cv::Mat result;
                         /* Custom kernel settings */
@@ -697,9 +724,30 @@ int main( void ) {
 
             ImGui::End();
 
+            /* Rendering */
             ImGui::Render();
-            ImGui_ImplGlfwGL3_RenderDrawData( ImGui::GetDrawData() );
+            // int display_w, display_h;
+            // glfwGetFramebufferSize( window, &display_w, &display_h );
+            // glViewport( 0, 0, display_w, display_h );
+            // glClearColor( clear_color.x * clear_color.w,
+            //               clear_color.y * clear_color.w,
+            //               clear_color.z * clear_color.w, clear_color.w );
+            // glClear( GL_COLOR_BUFFER_BIT );
+            ImGui_ImplOpenGL3_RenderDrawData( ImGui::GetDrawData() );
             /* Swap front and back buffers */
+
+            // Update and Render additional Platform Windows
+            // (Platform functions may change the current OpenGL context, so we
+            // save/restore it to make it easier to paste this code elsewhere.
+            //  For this specific demo app we could also call
+            //  glfwMakeContextCurrent(window) directly)
+            if ( io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable ) {
+                GLFWwindow* backup_current_context = glfwGetCurrentContext();
+                ImGui::UpdatePlatformWindows();
+                ImGui::RenderPlatformWindowsDefault();
+                glfwMakeContextCurrent( backup_current_context );
+            }
+
             glfwSwapBuffers( window );
 
             /* Poll for and process events */
@@ -711,8 +759,12 @@ int main( void ) {
         }
     }
 
-    ImGui_ImplGlfwGL3_Shutdown();
+    // Cleanup
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
+
+    glfwDestroyWindow( window );
     glfwTerminate();
     return 0;
 }

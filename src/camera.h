@@ -30,6 +30,7 @@ class Camera {
     float m_MovementSpeed;
     float m_MouseSensitivity;
     float m_Zoom;
+
     Camera( glm::vec3 position = glm::vec3( 0.f, 0.f, 0.f ),
             glm::vec3 up = glm::vec3( 0.f, 1.f, 0.f ), float yaw = YAW,
             float pitch = PITCH );
@@ -38,24 +39,12 @@ class Camera {
 
     glm::mat4 GetViewMatrix();
 
-    void ProcessKeyboard( CameraMovement direction, float deltaTime ) {
-        /* Move it */
-        // float velocity = m_MovementSpeed * deltaTime;
-        // if(direction == FORWARD){
-        //     m_Position += m_Front * velocity;
-        // }
-        // if(direction == BACKWARD){
-        //     m_Position -= m_Front * velocity;
-        // }
-        // if(direction == RIGHT){
-        //     m_Position += m_Right * velocity;
-        // }
-        // if(direction == LEFT){
-        //     m_Position -= m_Right * velocity;
-        // }
-    }
+    void ProcessKeyboard( CameraMovement direction, float deltaTime );
+    void ProcessMouseMovement( float xOffset, float yOffset,
+                               bool constraintPitch = true );
     void ProcessMouseScroll( float yOffset );
-    private:
-     void UpdateCameraVectors();
+
+   private:
+    void UpdateCameraVectors();
 };
 #endif

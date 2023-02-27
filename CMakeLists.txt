@@ -72,7 +72,10 @@ add_executable(main
 
   ${INC_DIR}/imgui/imgui.cpp
   ${INC_DIR}/imgui/imgui_draw.cpp
-  ${INC_DIR}/imgui/imgui_impl_glfw_gl3.cpp
+  ${INC_DIR}/imgui/imgui_impl_glfw.cpp
+  ${INC_DIR}/imgui/imgui_impl_opengl3.cpp
+  ${INC_DIR}/imgui/imgui_widgets.cpp
+  ${INC_DIR}/imgui/imgui_tables.cpp
 
   ${SRC_DIR}/tests/test.cpp
   ${SRC_DIR}/tests/test_clear_color.cpp
