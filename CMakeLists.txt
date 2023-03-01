@@ -68,6 +68,9 @@ add_executable(main
   ${SRC_DIR}/custom_filtering.cpp
   ${SRC_DIR}/texture_cv.cpp
 
+  ${SRC_DIR}/GUI/render_UI.cpp
+  ${SRC_DIR}/GUI/tests_menu.cpp
+
   ${INC_DIR}/stb_image/stb_image.cpp
 
   ${INC_DIR}/imgui/imgui.cpp
@@ -81,6 +84,9 @@ add_executable(main
   ${SRC_DIR}/tests/test_clear_color.cpp
   ${SRC_DIR}/tests/test_texture_2D.cpp
   ${SRC_DIR}/tests/test_3D.cpp
+
+  ${SRC_DIR}/renderer/framebuffer.cpp
+  ${SRC_DIR}/renderer/OpenGL_framebuffer.cpp
 )
 
 # target_link_libraries(main ${OpenCV_LIBS} imgui glm)

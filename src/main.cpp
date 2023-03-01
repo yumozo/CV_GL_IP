@@ -28,9 +28,8 @@
 #include "custom_filtering.h"
 #include "texture_cv.h"
 
-#include "tests/test_clear_color.h"
-#include "tests/test_texture_2D.h"
-#include "tests/test_3D.h"
+#include "GUI/render_UI.h"
+#include "GUI/tests_menu.h"
 
 /* Remove this if the VC Image class has implemeted */
 #include "../include/stb_image/stb_image.h"
@@ -92,21 +91,22 @@ int main( void ) {
         ImGui_ImplGlfw_InitForOpenGL( window, true );
         ImGui_ImplOpenGL3_Init( glsl_version );
 
-        // Tests
-        test::Test* currentTest = nullptr;
-        test::TestMenu* testMenu = new test::TestMenu( currentTest );
-        currentTest = testMenu;
+        /* Tests */
+        GUI *gui = new GUI();
+        // test::TestsMenuUI *testsMenu = new test::TestsMenuUI();
+        // test::Test* currentTest = nullptr;
+        // test::TestMenu* testMenu = new test::TestMenu( currentTest );
+        // currentTest = testMenu;
+        // testMenu->RegisterTest<test::TestClearColor>( "Clear Color" );
+        // testMenu->RegisterTest<test::TestTexture2D>( "2D Texture" );
+        // testMenu->RegisterTest<test::Test3D>( "Test 3D" );
 
-        testMenu->RegisterTest<test::TestClearColor>( "Clear Color" );
-        testMenu->RegisterTest<test::TestTexture2D>( "2D Texture" );
-        testMenu->RegisterTest<test::Test3D>( "Test 3D" );
-
+        /* IMAGE PROCESSING */
         /* Test texture for the CV image window */
         TextureCV inCVTex( "res/textures/tiger.jpg" );
         TextureCV outCVTex( "res/textures/tiger.jpg" );
         TextureCV hsvCVTex( "res/textures/tiger.jpg" );
 
-        /* IMAGE PROCESSING */
         GLuint srcImTexture;
         GLuint prcImTexture;
         GLuint hsvImTexture;
@@ -227,18 +227,21 @@ int main( void ) {
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
-            if ( currentTest ) {
-                currentTest->OnUpdate( 0.0f );
-                currentTest->OnRender();
-                ImGui::Begin( "Test" );
-                if ( currentTest != testMenu && ImGui::Button( "<-" ) ) {
-                    delete currentTest;
-                    currentTest = testMenu;
-                }
-                currentTest->OnImGuiRender();
-                ImGui::End();
-            }
+
+            // testsMenu->OnImGuiRender();
+            // if ( currentTest ) {
+            //     currentTest->OnUpdate( 0.0f );
+            //     currentTest->OnRender();
+            //     ImGui::Begin( "Test" );
+            //     if ( currentTest != testMenu && ImGui::Button( "<-" ) ) {
+            //         delete currentTest;
+            //         currentTest = testMenu;
+            //     }
+            //     currentTest->OnImGuiRender();
+            //     ImGui::End();
+            // }
             /* OpenCV image in ImGui window */
+
             /* Image Processing Window */
             ImGui::Begin( "Image Processing" );
             /* Options */
@@ -724,6 +727,9 @@ int main( void ) {
 
             ImGui::End();
 
+
+            /* Test Dockspace */
+            gui->RenderUI();
             /* Rendering */
             ImGui::Render();
             // int display_w, display_h;
@@ -753,10 +759,11 @@ int main( void ) {
             /* Poll for and process events */
             glfwPollEvents();
         }
-        delete currentTest;
-        if ( currentTest != testMenu ) {
-            delete testMenu;
-        }
+        // delete currentTest;
+        // if ( currentTest != testMenu ) {
+        //     delete testMenu;
+        // }
+        // testsMenu->Delete();
     }
 
     // Cleanup
